@@ -130,11 +130,16 @@ export default defineConfig({
           collapsed: false,
           items: [
             { text: 'Overview', link: '/account/' },
+            { text: 'Sign in', link: '/account/sign-in' },
+            { text: 'Sign out', link: '/account/sign-out' },
             { text: 'Change password', link: '/account/change-password' },
             { text: 'Two-factor authentication', link: '/account/two-factor-authentication' },
             { text: 'Recovery codes', link: '/account/recovery-codes' },
+            {
+              text: 'Disable two-factor authentication',
+              link: '/account/disable-two-factor-authentication',
+            },
             { text: 'Audit history', link: '/account/audit-history' },
-            { text: 'Sign out', link: '/account/sign-out' },
           ],
         },
       ],

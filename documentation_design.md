@@ -379,12 +379,12 @@ Goal: Cover baseline account workflows before product feature docs.
 
 | Task | Complexity | Estimate |
 | --- | --- | --- |
-| [ ] Write sign in and sign out docs | Low | 2 h |
-| [ ] Write change password doc, including password minimum and session revocation behavior | Low | 2 h |
-| [ ] Write 2FA setup doc with authenticator app guidance and recovery code warning | Medium | 4 h |
-| [ ] Write 2FA login, recovery code, and disable 2FA docs | Medium | 4 h |
-| [ ] Write personal audit history doc | Low | 2 h |
-| [ ] Write correlation ID and support-ready error reporting doc | Low | 2 h |
+| [x] Write sign in and sign out docs | Low | 2 h |
+| [x] Write change password doc, including password minimum and session revocation behavior | Low | 2 h |
+| [x] Write 2FA setup doc with authenticator app guidance and recovery code warning | Medium | 4 h |
+| [x] Write 2FA login, recovery code, and disable 2FA docs | Medium | 4 h |
+| [x] Write personal audit history doc | Low | 2 h |
+| [x] Write correlation ID and support-ready error reporting doc | Low | 2 h |
 
 Stage estimate: 16 hours.
 
