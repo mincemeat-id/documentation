@@ -1,0 +1,67 @@
+name: Confusing or inaccurate documentation
+description: Report a page that is hard to follow, outdated, or does not match the current UI.
+title: "[Confusing]: <short description>"
+labels: ["type: confusing-docs"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Use this template when a page exists but is hard to follow,
+        outdated, or does not match what you see in Mincemeat today.
+
+  - type: input
+    id: page-url
+    attributes:
+      label: Page URL
+      description: The full URL of the confusing page.
+      placeholder: https://docs.mincemeat.id/instances/start-stop-restart
+    validations:
+      required: true
+
+  - type: textarea
+    id: what-confused
+    attributes:
+      label: What was confusing or wrong?
+      description: Quote or describe the part of the page that did not work for you.
+    validations:
+      required: true
+
+  - type: textarea
+    id: expected
+    attributes:
+      label: What did you expect?
+      description: What did you think the page would say, or what does the current UI actually show?
+    validations:
+      required: true
+
+  - type: textarea
+    id: steps
+    attributes:
+      label: Steps you took
+      description: List the steps you followed and where they diverged from the documentation.
+      placeholder: |
+        1. Opened the Instances page
+        2. Selected my instance
+        3. Tried to follow "Steps", step 3 said "Click Restart" but there is no Restart button.
+    validations:
+      required: true
+
+  - type: dropdown
+    id: severity
+    attributes:
+      label: How serious is the issue?
+      options:
+        - Minor (slightly confusing, did not block me)
+        - Moderate (took extra time to work around)
+        - High (blocked me from completing the task)
+    validations:
+      required: true
+
+  - type: checkboxes
+    id: safety
+    attributes:
+      label: Public-repository safety
+      description: Confirm this report does not include any of the following.
+      options:
+        - label: No credentials, tokens, real customer data, private hostnames, or internal IPs in the report.
+          required: true

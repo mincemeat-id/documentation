@@ -1,0 +1,61 @@
+name: Missing documentation
+description: Report a Mincemeat feature, workflow, or behavior that is not documented.
+title: "[Missing]: <short description>"
+labels: ["type: missing-docs"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Use this template when you expected to find documentation and
+        could not. If the page exists but is wrong or confusing, use
+        the "Confusing documentation" template instead.
+
+  - type: textarea
+    id: what
+    attributes:
+      label: What is missing?
+      description: Describe the feature, workflow, or behavior that needs documentation.
+    validations:
+      required: true
+
+  - type: textarea
+    id: where-i-looked
+    attributes:
+      label: Where did you look?
+      description: List the pages, search terms, or sections you checked before opening this issue.
+    validations:
+      required: true
+
+  - type: dropdown
+    id: section
+    attributes:
+      label: Which section should it live in?
+      description: Pick the closest match. A maintainer may move it during review.
+      options:
+        - Get Started
+        - Account
+        - Instances
+        - Static Sites
+        - Domains
+        - Troubleshooting
+        - Contribute
+        - Not sure
+    validations:
+      required: true
+
+  - type: textarea
+    id: outcome
+    attributes:
+      label: What outcome should a reader achieve?
+      description: Describe what a reader should be able to do after reading the missing page.
+    validations:
+      required: true
+
+  - type: checkboxes
+    id: safety
+    attributes:
+      label: Public-repository safety
+      description: Confirm this report does not include any of the following.
+      options:
+        - label: No credentials, tokens, real customer data, private hostnames, or internal IPs in the report.
+          required: true

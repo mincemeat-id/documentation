@@ -1,0 +1,45 @@
+name: Typo or small wording fix
+description: Report a typo, broken link, or small wording issue on a docs page.
+title: "[Typo]: <short description>"
+labels: ["type: typo", "good first issue"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for catching this! Typos are great first contributions.
+        If you are comfortable opening a pull request directly, feel
+        free to skip this issue and submit the fix.
+
+  - type: input
+    id: page-url
+    attributes:
+      label: Page URL
+      description: The full URL of the page with the issue.
+      placeholder: https://docs.mincemeat.id/static-sites/custom-domains
+    validations:
+      required: true
+
+  - type: textarea
+    id: current
+    attributes:
+      label: What the page says now
+      description: Paste the exact current wording (a sentence or two of context).
+    validations:
+      required: true
+
+  - type: textarea
+    id: suggested
+    attributes:
+      label: Suggested wording
+      description: How the page should read instead.
+    validations:
+      required: true
+
+  - type: checkboxes
+    id: safety
+    attributes:
+      label: Public-repository safety
+      description: Confirm this report does not include any of the following.
+      options:
+        - label: No credentials, tokens, real customer data, private hostnames, or internal IPs in the report.
+          required: true

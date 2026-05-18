@@ -1,12 +1,14 @@
 ---
 title: Domains
-description: Connect custom domains, validate DNS, and understand proxy and cache behavior.
+description: Connect custom domains, validate DNS, and understand proxy and cache behavior in Mincemeat.
+category: domains
+audience: user
+updated: 2026-05-18
 ---
 
 # Domains
 
-This section covers domain workflows: DNS basics, connecting a custom
-domain, reading validation states, and understanding cache and proxy
-behavior.
+Connect custom domains to your instances and static sites, validate
+DNS, and understand proxy and cache behavior.
 
 Detailed pages are added in later documentation stages.

@@ -55,10 +55,18 @@ function stripFencedCodeBlocks(source) {
   return source.replace(/```[\s\S]*?```/g, '')
 }
 
+function stripInlineCode(source) {
+  // Inline code spans are wrapped in single backticks. Strip them so
+  // that example URLs in inline code (for example, the dev server URL
+  // documented in contributing/local-development.md) don't trip the
+  // localhost or marker checks.
+  return source.replace(/`[^`\n]+`/g, '')
+}
+
 function checkFile(file) {
   const fullPath = path.join(repoRoot, file)
   const raw = readFileSync(fullPath, 'utf8')
-  const text = stripFencedCodeBlocks(raw)
+  const text = stripInlineCode(stripFencedCodeBlocks(raw))
   const issues = []
 
   for (const match of text.matchAll(LOCALHOST_PATTERN)) {

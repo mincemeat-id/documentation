@@ -1,0 +1,92 @@
+name: Feature documentation request
+description: Request documentation for a new or upcoming Mincemeat feature.
+title: "[Feature docs]: <feature name>"
+labels: ["type: feature-docs"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Use this template to request documentation for a Mincemeat
+        feature that is available to users but not yet documented, or
+        that is shipping soon.
+
+  - type: input
+    id: feature
+    attributes:
+      label: Feature name
+      description: The name of the feature as it appears (or will appear) in the Mincemeat UI.
+    validations:
+      required: true
+
+  - type: textarea
+    id: description
+    attributes:
+      label: Short description
+      description: One or two sentences about what the feature does and who uses it.
+    validations:
+      required: true
+
+  - type: dropdown
+    id: section
+    attributes:
+      label: Which section should the docs live in?
+      options:
+        - Get Started
+        - Account
+        - Instances
+        - Static Sites
+        - Domains
+        - Troubleshooting
+        - Not sure
+    validations:
+      required: true
+
+  - type: dropdown
+    id: audience
+    attributes:
+      label: Who is the feature for?
+      description: Documentation in this repository is for the `user` role. Operator-only or admin-only features do not belong here.
+      options:
+        - All users
+        - Users on a specific plan
+        - Users with a specific role or assignment
+        - Operators or admins only (NOT eligible for this repo)
+    validations:
+      required: true
+
+  - type: textarea
+    id: workflows
+    attributes:
+      label: User workflows to cover
+      description: List the concrete tasks a user should be able to complete with the documentation.
+      placeholder: |
+        - Enable the feature
+        - Configure option X
+        - Recover from common error Y
+    validations:
+      required: true
+
+  - type: input
+    id: availability
+    attributes:
+      label: Availability or release date
+      description: Is the feature live today? Behind a flag? Scheduled for a date?
+    validations:
+      required: false
+
+  - type: textarea
+    id: references
+    attributes:
+      label: Public references
+      description: Public links, screenshots from a seeded demo, or marketing pages that describe the feature. Do not link to private repositories or internal documents.
+    validations:
+      required: false
+
+  - type: checkboxes
+    id: safety
+    attributes:
+      label: Public-repository safety
+      description: Confirm this request does not include any of the following.
+      options:
+        - label: No credentials, tokens, real customer data, private hostnames, internal IPs, or links to private repositories in the request.
+          required: true

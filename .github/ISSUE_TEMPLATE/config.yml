@@ -1,0 +1,8 @@
+blank_issues_enabled: false
+contact_links:
+  - name: Security or sensitive-data issue
+    url: https://github.com/mincemeat-id/documentation/security/policy
+    about: Do NOT open a public issue. Use the private channels in SECURITY.md.
+  - name: Mincemeat product support
+    url: https://mincemeat.id/support
+    about: Issues with your account, instances, or sites belong on the support channel, not this docs repository.

@@ -1,0 +1,59 @@
+// markdownlint configuration for the Mincemeat documentation
+// repository. Rule reference:
+// https://github.com/DavidAnson/markdownlint/blob/main/doc/Rules.md
+{
+  // Start from the standard ruleset
+  "default": true,
+
+  // MD001 - heading levels increment by one (keep on)
+  // MD003 - heading style: ATX only (`#`, `##`)
+  "MD003": { "style": "atx" },
+
+  // MD004 - unordered list style: dash
+  "MD004": { "style": "dash" },
+
+  // MD007 - unordered list indentation
+  "MD007": { "indent": 2 },
+
+  // MD013 - line length: handled by editors and Prettier, not enforced here
+  "MD013": false,
+
+  // MD022 - blank lines around headings (keep on)
+  // MD024 - duplicate headings: allow if nested under different parents
+  "MD024": { "siblings_only": true },
+
+  // MD025 - single H1 per document. The H1 lives in the body; the
+  // `title` frontmatter is metadata, not a heading.
+  "MD025": { "front_matter_title": "" },
+
+  // MD026 - no trailing punctuation in headings, allow ? and !
+  "MD026": { "punctuation": ".,;:" },
+
+  // MD029 - ordered list item prefix: number each step
+  "MD029": { "style": "ordered" },
+
+  // MD033 - inline HTML: allow because we use Vue components and
+  // semantic elements in prose.
+  "MD033": false,
+
+  // MD034 - bare URLs: disallow, prefer Markdown link syntax
+  "MD034": true,
+
+  // MD036 - emphasis as heading: keep on
+  // MD040 - fenced code blocks must have a language tag
+  "MD040": true,
+
+  // MD041 - first line of file must be a top-level heading. VitePress
+  // pages start with frontmatter (`---`), which counts as the first
+  // line, so we disable this rule.
+  "MD041": false,
+
+  // MD046 - code block style: fenced
+  "MD046": { "style": "fenced" },
+
+  // MD049 - emphasis style: underscore-free
+  "MD049": { "style": "asterisk" },
+
+  // MD050 - strong style: double asterisk
+  "MD050": { "style": "asterisk" }
+}

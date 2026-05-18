@@ -1,6 +1,9 @@
 ---
 title: Get Started
 description: Product overview, account access, and your first steps in Mincemeat.
+category: get-started
+audience: user
+updated: 2026-05-18
 ---
 
 # Get Started

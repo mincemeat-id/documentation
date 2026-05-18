@@ -9,6 +9,8 @@
     "preview": "vitepress preview .",
     "typecheck": "tsc --noEmit -p .vitepress/tsconfig.json",
     "lint:links": "node scripts/check-links.mjs",
+    "lint:frontmatter": "node scripts/check-frontmatter.mjs",
+    "lint:markdown": "markdownlint-cli2 \"**/*.md\" \"#node_modules\" \"#.vitepress/dist\" \"#.vitepress/cache\"",
     "scan:secrets": "node scripts/scan-secrets.mjs"
   },
   "dependencies": {
@@ -17,6 +19,7 @@
   },
   "devDependencies": {
     "@types/node": "^24.12.2",
+    "markdownlint-cli2": "^0.13.0",
     "typescript": "^5.6.0"
   }
 }

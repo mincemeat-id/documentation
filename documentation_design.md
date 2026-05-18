@@ -334,12 +334,12 @@ Goal: Create a working public VitePress docs repository modeled after
 
 | Task | Complexity | Estimate |
 | --- | --- | --- |
-| [ ] Create repository scaffold with VitePress, Vue, TypeScript, and npm scripts | Medium | 3 h |
-| [ ] Port selected `../web-landing` config patterns: clean URLs, sitemap, SEO head, favicon, preview scripts | Medium | 3 h |
-| [ ] Add Cloudflare Pages-ready `package.json`, lockfile, `.nvmrc`, `.gitignore`, and README | Low | 2 h |
-| [ ] Add MIT `LICENSE` and CC BY 4.0 `LICENSE-CONTENT` | Low | 1 h |
-| [ ] Add `SECURITY.md` and public repository safety checklist | Low | 1 h |
-| [ ] Add baseline CI: install, build, typecheck, link check, secret scan | Medium | 4 h |
+| [x] Create repository scaffold with VitePress, Vue, TypeScript, and npm scripts | Medium | 3 h |
+| [x] Port selected `../web-landing` config patterns: clean URLs, sitemap, SEO head, favicon, preview scripts | Medium | 3 h |
+| [x] Add Cloudflare Pages-ready `package.json`, lockfile, `.nvmrc`, `.gitignore`, and README | Low | 2 h |
+| [x] Add MIT `LICENSE` and CC BY 4.0 `LICENSE-CONTENT` | Low | 1 h |
+| [x] Add `SECURITY.md` and public repository safety checklist | Low | 1 h |
+| [x] Add baseline CI: install, build, typecheck, link check, secret scan | Medium | 4 h |
 
 Stage estimate: 14 hours.
 
@@ -349,12 +349,12 @@ Goal: Build a docs-first UI that keeps Mincemeat's Carbon-inspired identity.
 
 | Task | Complexity | Estimate |
 | --- | --- | --- |
-| [ ] Adapt IBM Plex fonts and Carbon-inspired tokens from `../web-landing` and `../coreapp/docs/design-system.md` | Medium | 3 h |
-| [ ] Build docs layout: header, sidebar, mobile nav, page TOC, previous/next links, footer license block | High | 8 h |
-| [ ] Create reusable docs components: callout, status table, prerequisite list, step card, screenshot frame, copyable DNS record | Medium | 6 h |
-| [ ] Add accessible focus states, skip link, keyboard navigation checks, and reduced-motion handling | Medium | 4 h |
-| [ ] Add VitePress local search and tune sidebar labels | Low | 2 h |
-| [ ] Run visual QA on desktop and mobile breakpoints | Medium | 3 h |
+| [x] Adapt IBM Plex fonts and Carbon-inspired tokens from `../web-landing` and `../coreapp/docs/design-system.md` | Medium | 3 h |
+| [x] Build docs layout: header, sidebar, mobile nav, page TOC, previous/next links, footer license block | High | 8 h |
+| [x] Create reusable docs components: callout, status table, prerequisite list, step card, screenshot frame, copyable DNS record | Medium | 6 h |
+| [x] Add accessible focus states, skip link, keyboard navigation checks, and reduced-motion handling | Medium | 4 h |
+| [x] Add VitePress local search and tune sidebar labels | Low | 2 h |
+| [x] Run visual QA on desktop and mobile breakpoints | Medium | 3 h |
 
 Stage estimate: 26 hours.
 
@@ -364,12 +364,12 @@ Goal: Make the repository welcoming and consistent for public contributors.
 
 | Task | Complexity | Estimate |
 | --- | --- | --- |
-| [ ] Write documentation style guide with voice, structure, terminology, examples, and screenshot rules | Medium | 5 h |
-| [ ] Write contribution guide with local development, branch, issue, PR, review, and licensing expectations | Medium | 4 h |
-| [ ] Add PR template with docs quality checklist and sensitive-data checklist | Low | 1 h |
-| [ ] Add issue templates for typo, missing docs, confusing docs, and feature docs request | Low | 2 h |
-| [ ] Add content frontmatter standard: title, description, category, audience, updated date, related pages | Low | 2 h |
-| [ ] Add Vale or markdownlint rules if the team wants automated prose checks | Medium | 4 h |
+| [x] Write documentation style guide with voice, structure, terminology, examples, and screenshot rules | Medium | 5 h |
+| [x] Write contribution guide with local development, branch, issue, PR, review, and licensing expectations | Medium | 4 h |
+| [x] Add PR template with docs quality checklist and sensitive-data checklist | Low | 1 h |
+| [x] Add issue templates for typo, missing docs, confusing docs, and feature docs request | Low | 2 h |
+| [x] Add content frontmatter standard: title, description, category, audience, updated date, related pages | Low | 2 h |
+| [x] Add Vale or markdownlint rules if the team wants automated prose checks | Medium | 4 h |
 
 Stage estimate: 18 hours.
 

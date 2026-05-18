@@ -44,6 +44,12 @@ jobs:
       - name: Link guardrail
         run: npm run lint:links
 
+      - name: Frontmatter check
+        run: npm run lint:frontmatter
+
+      - name: Markdown lint
+        run: npm run lint:markdown
+
       - name: Local secret scan
         run: npm run scan:secrets
 

@@ -15,8 +15,8 @@ discussion that includes vulnerability details.
 
 Preferred reporting channels, in order:
 
-1. Email **security@mincemeat.id** with a clear description of the issue,
-   impact, and reproduction steps.
+1. Email [security@mincemeat.id](mailto:security@mincemeat.id) with a
+   clear description of the issue, impact, and reproduction steps.
 2. If email is not possible, use GitHub's private vulnerability reporting
    on this repository (Security tab → "Report a vulnerability").
 
