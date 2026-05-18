@@ -1,0 +1,296 @@
+/*
+ * Layout adjustments on top of the VitePress default theme.
+ *
+ * VitePress gives us the persistent left sidebar, header, mobile nav,
+ * page TOC (aside), and previous/next links. We tighten typography,
+ * widen the content area for docs reading, and harden borders.
+ */
+
+/* Hard-edge nav, sidebar, search */
+.VPNavBar,
+.VPNavBar.has-sidebar .content-body,
+.VPSidebar,
+.VPLocalSearchBox,
+.DocSearch-Button {
+  border-radius: var(--radius-none) !important;
+}
+
+.VPNavBar {
+  border-bottom: 1px solid var(--color-border-subtle-00);
+}
+
+.VPNavBar.has-sidebar .content-body {
+  background: var(--color-bg);
+}
+
+.VPNavBarTitle .title {
+  font-weight: var(--font-weight-semibold);
+  letter-spacing: var(--tracking-tight);
+}
+
+.VPNavBarMenuLink,
+.VPNavBarMenuGroup .text {
+  font-weight: var(--font-weight-semibold);
+}
+
+/* Sidebar — productive density */
+.VPSidebar {
+  background: var(--color-bg);
+  border-right: 1px solid var(--color-border-subtle-00);
+  padding: var(--spacing-6) var(--spacing-5) var(--spacing-9) var(--spacing-5);
+}
+
+.VPSidebarItem.level-0 > .item > .text {
+  font-size: var(--text-xs);
+  font-weight: var(--font-weight-semibold);
+  text-transform: uppercase;
+  letter-spacing: 0.4px;
+  color: var(--color-text-secondary);
+}
+
+.VPSidebarItem.level-1 .link,
+.VPSidebarItem.level-2 .link {
+  font-weight: var(--font-weight-regular);
+  font-size: var(--text-sm);
+  padding-block: var(--spacing-2);
+  border-radius: var(--radius-none);
+  border-left: 2px solid transparent;
+  padding-left: var(--spacing-3);
+  transition: background-color 75ms ease, color 75ms ease, border-color 75ms ease;
+}
+
+.VPSidebarItem.is-active > .item > .link .text {
+  color: var(--color-interactive);
+  font-weight: var(--font-weight-semibold);
+}
+
+.VPSidebarItem.is-active > .item > .link {
+  border-left-color: var(--color-interactive);
+}
+
+.VPSidebarItem .link:hover .text {
+  color: var(--color-link-hover);
+}
+
+/* Page content */
+.VPDoc {
+  padding-top: var(--spacing-7);
+}
+
+.VPDoc .container {
+  max-width: var(--site-max-width);
+}
+
+.VPDoc .content {
+  padding-block-end: var(--spacing-9);
+}
+
+.VPDoc.has-aside .content-container {
+  max-width: 52rem;
+}
+
+/* Page TOC (aside) */
+.VPDocAside {
+  padding-top: var(--spacing-7);
+}
+
+.VPDocAsideOutline .outline-title {
+  font-size: var(--text-xs);
+  text-transform: uppercase;
+  letter-spacing: 0.4px;
+  color: var(--color-text-secondary);
+  font-weight: var(--font-weight-semibold);
+}
+
+.VPDocAsideOutline .outline-link {
+  font-size: var(--text-sm);
+  color: var(--color-text-secondary);
+  border-radius: var(--radius-none);
+}
+
+.VPDocAsideOutline .outline-link.active {
+  color: var(--color-interactive);
+  font-weight: var(--font-weight-semibold);
+}
+
+/* Previous / next */
+.VPDocFooter {
+  border-top: 1px solid var(--color-border-subtle-00);
+  padding-top: var(--spacing-6);
+}
+
+.pager-link {
+  border: 1px solid var(--color-border-subtle-00) !important;
+  border-radius: var(--radius-none) !important;
+  background: var(--color-layer-01) !important;
+  transition: background-color 75ms ease, border-color 75ms ease;
+}
+
+.pager-link:hover {
+  border-color: var(--color-interactive) !important;
+  background: var(--color-layer-hover-01) !important;
+}
+
+.pager-link .desc {
+  color: var(--color-text-secondary);
+  font-size: var(--text-xs);
+  text-transform: uppercase;
+  letter-spacing: 0.4px;
+}
+
+.pager-link .title {
+  color: var(--color-text-primary);
+  font-weight: var(--font-weight-semibold);
+}
+
+/* Edit link / last updated */
+.VPDocFooter .edit-link-button {
+  color: var(--color-interactive);
+  font-weight: var(--font-weight-semibold);
+}
+
+.VPDocFooter .last-updated {
+  color: var(--color-text-helper);
+  font-size: var(--text-xs);
+}
+
+/* Footer license block */
+.VPFooter {
+  border-top: 1px solid var(--color-border-subtle-00);
+  background: var(--color-layer-01);
+  padding: var(--spacing-6) var(--site-gutter);
+}
+
+.VPFooter .message,
+.VPFooter .copyright {
+  color: var(--color-text-secondary);
+  font-size: var(--text-xs);
+}
+
+.VPFooter a {
+  color: var(--color-interactive);
+  font-weight: var(--font-weight-semibold);
+}
+
+/* Search */
+.VPNavBarSearch .DocSearch-Button {
+  background: var(--color-layer-01);
+  border: 1px solid var(--color-border-subtle-00);
+  border-radius: var(--radius-none);
+  color: var(--color-text-secondary);
+}
+
+.VPLocalSearchBox .shell {
+  border-radius: var(--radius-none) !important;
+  border: 1px solid var(--color-border-subtle-00);
+}
+
+.VPLocalSearchBox .search-bar {
+  border-radius: var(--radius-none) !important;
+}
+
+/* Code blocks */
+.vp-doc div[class*='language-'] {
+  border-radius: var(--radius-none);
+  border: 1px solid var(--color-border-subtle-00);
+}
+
+.vp-doc :not(pre) > code {
+  font-size: 0.85em;
+  padding: 0.15em 0.35em;
+  background: var(--color-layer-01);
+  border: 1px solid var(--color-border-subtle-00);
+  border-radius: var(--radius-xs);
+}
+
+/* Hero (home page) */
+.VPHero .name,
+.VPHero .text {
+  font-weight: var(--font-weight-semibold);
+  letter-spacing: var(--tracking-tight);
+}
+
+.VPHero .tagline {
+  color: var(--color-text-secondary);
+}
+
+.VPButton {
+  border-radius: var(--radius-none) !important;
+  font-weight: var(--font-weight-semibold);
+  letter-spacing: var(--tracking-tight);
+}
+
+/* Feature cards */
+.VPFeature {
+  background: var(--color-layer-01);
+  border: 1px solid var(--color-border-subtle-00);
+  border-radius: var(--radius-none) !important;
+  transition: border-color 75ms ease, background-color 75ms ease;
+}
+
+.VPFeature.link:hover {
+  border-color: var(--color-interactive);
+  background: var(--color-layer-hover-01);
+}
+
+.VPFeature .title {
+  font-weight: var(--font-weight-semibold);
+}
+
+/* Tables in prose */
+.vp-doc table {
+  display: table;
+  width: 100%;
+  border-collapse: collapse;
+  font-size: var(--text-sm);
+  margin: var(--spacing-5) 0;
+}
+
+.vp-doc table th,
+.vp-doc table td {
+  border: 1px solid var(--color-border-subtle-00);
+  padding: var(--spacing-3) var(--spacing-4);
+}
+
+.vp-doc table th {
+  background: var(--color-layer-01);
+  text-align: left;
+  font-weight: var(--font-weight-semibold);
+}
+
+.vp-doc table tr:nth-child(2n) {
+  background: var(--color-layer-02);
+}
+
+/* Headings rhythm */
+.vp-doc h1 {
+  font-size: var(--text-2xl);
+  letter-spacing: -0.02em;
+}
+
+.vp-doc h2 {
+  margin-top: var(--spacing-8);
+  padding-top: var(--spacing-5);
+  border-top: 1px solid var(--color-border-subtle-00);
+  font-size: var(--text-xl);
+}
+
+.vp-doc h3 {
+  margin-top: var(--spacing-6);
+  font-size: var(--text-lg);
+}
+
+/* Mobile tweaks */
+@media (max-width: 768px) {
+  .VPDoc {
+    padding-top: var(--spacing-5);
+  }
+
+  .VPDoc.has-aside .content-container {
+    max-width: 100%;
+  }
+
+  .vp-doc h2 {
+    margin-top: var(--spacing-7);
+  }
+}

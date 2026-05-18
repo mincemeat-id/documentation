@@ -1,0 +1,260 @@
+/*
+ * Carbon-inspired design tokens for Mincemeat Docs.
+ *
+ * Mirrors `../web-landing/.vitepress/theme/styles/tokens.css` and the
+ * conventions documented in `../coreapp/docs/design-system.md`.
+ *
+ * VitePress's appearance toggle adds/removes only the `.dark` class on
+ * <html>. Keep dark mode driven solely by `.dark`.
+ */
+
+:root {
+  color-scheme: light;
+
+  /* Typography */
+  --font-sans: 'IBM Plex Sans', system-ui, -apple-system, 'Segoe UI', sans-serif;
+  --font-mono: 'IBM Plex Mono', 'SFMono-Regular', Menlo, Consolas, monospace;
+
+  --text-xs: 0.75rem;
+  --text-sm: 0.875rem;
+  --text-base: 1rem;
+  --text-lg: 1.25rem;
+  --text-xl: 1.75rem;
+  --text-2xl: 2rem;
+  --text-3xl: 2.5rem;
+
+  --leading-tight: 1rem;
+  --leading-snug: 1.25rem;
+  --leading-normal: 1.5rem;
+  --leading-relaxed: 1.75rem;
+
+  --font-weight-regular: 400;
+  --font-weight-semibold: 600;
+  --tracking-tight: 0;
+  --tracking-code: 0.32px;
+
+  /* Spacing (4px base grid) */
+  --spacing-1: 0.125rem;
+  --spacing-2: 0.25rem;
+  --spacing-3: 0.5rem;
+  --spacing-4: 0.75rem;
+  --spacing-5: 1rem;
+  --spacing-6: 1.5rem;
+  --spacing-7: 2rem;
+  --spacing-8: 2.5rem;
+  --spacing-9: 3rem;
+
+  /* Component heights */
+  --height-sm: 1.5rem;
+  --height-md: 2rem;
+  --height-lg: 2.5rem;
+  --height-xl: 3rem;
+
+  /* Border radius — hard edges */
+  --radius-none: 0;
+  --radius-xs: 2px;
+
+  /* Surfaces */
+  --color-bg: #ffffff;
+  --color-bg-hover: rgba(141, 141, 141, 0.12);
+  --color-bg-active: rgba(141, 141, 141, 0.5);
+  --color-bg-selected: rgba(141, 141, 141, 0.2);
+  --color-bg-inverse: #393939;
+  --color-bg-brand: #0f62fe;
+
+  --color-layer-01: #f4f4f4;
+  --color-layer-02: #ffffff;
+  --color-layer-hover-01: #e8e8e8;
+  --color-layer-active-01: #c6c6c6;
+  --color-layer-selected-01: #e0e0e0;
+
+  --color-field-01: #f4f4f4;
+  --color-field-02: #ffffff;
+  --color-field-hover-01: #e8e8e8;
+
+  /* Borders */
+  --color-border-interactive: #0f62fe;
+  --color-border-subtle-00: #e0e0e0;
+  --color-border-subtle-01: #c6c6c6;
+  --color-border-strong-01: #8d8d8d;
+  --color-border-inverse: #161616;
+  --color-border-disabled: #c6c6c6;
+
+  /* Text */
+  --color-text-primary: #161616;
+  --color-text-secondary: #525252;
+  --color-text-placeholder: #a8a8a8;
+  --color-text-helper: #6f6f6f;
+  --color-text-on-color: #ffffff;
+  --color-text-inverse: #ffffff;
+  --color-text-error: #da1e28;
+  --color-text-disabled: rgba(22, 22, 22, 0.25);
+
+  --color-link-primary: #0f62fe;
+  --color-link-hover: #0043ce;
+
+  /* Interactive */
+  --color-interactive: #0f62fe;
+  --color-interactive-hover: #0050e6;
+  --color-interactive-active: #002d9c;
+  --color-focus: #0f62fe;
+
+  /* Support / status */
+  --color-support-error: #da1e28;
+  --color-support-success: #198038;
+  --color-support-warning: #f1c21b;
+  --color-support-info: #0043ce;
+
+  --color-notification-error-bg: #fff1f1;
+  --color-notification-success-bg: #defbe6;
+  --color-notification-warning-bg: #fcf4d6;
+  --color-notification-info-bg: #edf5ff;
+
+  --site-max-width: 80rem;
+  --site-gutter: var(--spacing-7);
+
+  /* ----- VitePress default-theme overrides -----
+   * Map the VitePress design tokens onto Carbon ones so the default
+   * sidebar, navbar, search, prev/next, TOC, and code blocks all inherit
+   * Mincemeat styling without forking the entire layout.
+   */
+  --vp-font-family-base: var(--font-sans);
+  --vp-font-family-mono: var(--font-mono);
+
+  --vp-c-bg: var(--color-bg);
+  --vp-c-bg-alt: var(--color-layer-01);
+  --vp-c-bg-elv: var(--color-layer-02);
+  --vp-c-bg-soft: var(--color-layer-01);
+
+  --vp-c-text-1: var(--color-text-primary);
+  --vp-c-text-2: var(--color-text-secondary);
+  --vp-c-text-3: var(--color-text-helper);
+
+  --vp-c-divider: var(--color-border-subtle-00);
+  --vp-c-gutter: var(--color-border-subtle-00);
+  --vp-c-border: var(--color-border-subtle-01);
+
+  --vp-c-brand-1: var(--color-interactive);
+  --vp-c-brand-2: var(--color-interactive-hover);
+  --vp-c-brand-3: var(--color-interactive-active);
+  --vp-c-brand-soft: rgba(15, 98, 254, 0.08);
+
+  --vp-c-default-1: var(--color-layer-01);
+  --vp-c-default-2: var(--color-layer-hover-01);
+  --vp-c-default-3: var(--color-layer-active-01);
+  --vp-c-default-soft: var(--color-layer-01);
+
+  --vp-c-tip-1: var(--color-interactive);
+  --vp-c-tip-2: var(--color-interactive-hover);
+  --vp-c-tip-3: var(--color-interactive-active);
+  --vp-c-tip-soft: var(--color-notification-info-bg);
+
+  --vp-c-warning-1: #8e4700;
+  --vp-c-warning-2: #b15a00;
+  --vp-c-warning-3: #f1c21b;
+  --vp-c-warning-soft: var(--color-notification-warning-bg);
+
+  --vp-c-danger-1: var(--color-support-error);
+  --vp-c-danger-2: #b81922;
+  --vp-c-danger-3: #750e13;
+  --vp-c-danger-soft: var(--color-notification-error-bg);
+
+  --vp-c-success-1: var(--color-support-success);
+  --vp-c-success-2: #0e6027;
+  --vp-c-success-3: #044317;
+  --vp-c-success-soft: var(--color-notification-success-bg);
+
+  --vp-button-brand-bg: var(--color-interactive);
+  --vp-button-brand-border: var(--color-interactive);
+  --vp-button-brand-hover-bg: var(--color-interactive-hover);
+  --vp-button-brand-hover-border: var(--color-interactive-hover);
+  --vp-button-brand-active-bg: var(--color-interactive-active);
+  --vp-button-brand-active-border: var(--color-interactive-active);
+  --vp-button-brand-text: var(--color-text-on-color);
+  --vp-button-brand-hover-text: var(--color-text-on-color);
+  --vp-button-brand-active-text: var(--color-text-on-color);
+
+  --vp-button-alt-bg: transparent;
+  --vp-button-alt-border: var(--color-border-strong-01);
+  --vp-button-alt-text: var(--color-text-primary);
+  --vp-button-alt-hover-bg: var(--color-layer-hover-01);
+  --vp-button-alt-hover-border: var(--color-border-strong-01);
+  --vp-button-alt-hover-text: var(--color-text-primary);
+  --vp-button-alt-active-bg: var(--color-layer-active-01);
+  --vp-button-alt-active-border: var(--color-border-strong-01);
+  --vp-button-alt-active-text: var(--color-text-primary);
+
+  --vp-nav-height: 56px;
+  --vp-layout-max-width: var(--site-max-width);
+  --vp-sidebar-width: 17rem;
+  --vp-input-border-radius: var(--radius-none);
+  --vp-border-radius-large: var(--radius-none);
+
+  /* Home hero accent */
+  --vp-home-hero-name-color: var(--color-interactive);
+  --vp-home-hero-image-background-image: none;
+  --vp-home-hero-image-filter: none;
+
+  /* Code blocks */
+  --vp-code-block-bg: #161616;
+  --vp-code-block-color: #f4f4f4;
+  --vp-code-line-highlight-color: rgba(15, 98, 254, 0.18);
+  --vp-code-bg: var(--color-layer-01);
+  --vp-code-color: var(--color-text-primary);
+}
+
+.dark {
+  color-scheme: dark;
+
+  --color-bg: #161616;
+  --color-bg-hover: rgba(244, 244, 244, 0.08);
+  --color-bg-active: rgba(244, 244, 244, 0.18);
+  --color-bg-selected: rgba(244, 244, 244, 0.12);
+  --color-bg-inverse: #f4f4f4;
+
+  --color-layer-01: #262626;
+  --color-layer-02: #393939;
+  --color-layer-hover-01: #353535;
+  --color-layer-active-01: #525252;
+  --color-layer-selected-01: #525252;
+
+  --color-field-01: #262626;
+  --color-field-02: #393939;
+  --color-field-hover-01: #353535;
+
+  --color-border-subtle-00: #393939;
+  --color-border-subtle-01: #525252;
+  --color-border-strong-01: #6f6f6f;
+  --color-border-inverse: #f4f4f4;
+  --color-border-disabled: #525252;
+
+  --color-text-primary: #f4f4f4;
+  --color-text-secondary: #c6c6c6;
+  --color-text-placeholder: #6f6f6f;
+  --color-text-helper: #a8a8a8;
+  --color-text-inverse: #161616;
+  --color-text-disabled: rgba(244, 244, 244, 0.25);
+
+  --color-link-primary: #78a9ff;
+  --color-link-hover: #a6c8ff;
+
+  --color-interactive: #4589ff;
+  --color-interactive-hover: #78a9ff;
+  --color-interactive-active: #0f62fe;
+  --color-support-success: #42be65;
+
+  --color-notification-error-bg: #2d0709;
+  --color-notification-success-bg: #071908;
+  --color-notification-warning-bg: #322600;
+  --color-notification-info-bg: #001141;
+
+  --vp-c-brand-soft: rgba(69, 137, 255, 0.16);
+  --vp-code-block-bg: #0b0b0b;
+  --vp-code-bg: var(--color-layer-01);
+}
+
+@media (max-width: 760px) {
+  :root {
+    --site-gutter: var(--spacing-5);
+  }
+}
