@@ -18,7 +18,13 @@ export default defineConfig({
   cleanUrls: true,
   appearance: true,
   lastUpdated: true,
-  srcExclude: ['README.md', 'documentation_design.md'],
+  srcExclude: [
+    'README.md',
+    'CONTRIBUTING.md',
+    'SECURITY.md',
+    'AGENTS.md',
+    'documentation_design.md',
+  ],
   sitemap: {
     hostname: siteOrigin,
     transformItems(items) {

@@ -52,6 +52,7 @@ const EXCLUDED_FILES = new Set([
   'README.md',
   'CONTRIBUTING.md',
   'SECURITY.md',
+  'AGENTS.md',
   'LICENSE',
   'LICENSE-CONTENT',
   '404.md',
