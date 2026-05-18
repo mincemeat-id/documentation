@@ -394,15 +394,15 @@ Goal: Make assigned instance usage clear for non-admin users.
 
 | Task | Complexity | Estimate |
 | --- | --- | --- |
-| [ ] Write Instances overview and "what you can do with user access" page | Medium | 3 h |
-| [ ] Write view/filter/search assigned instances page | Low | 2 h |
-| [ ] Write instance status guide with user-friendly meanings and waiting states | Medium | 4 h |
-| [ ] Write lifecycle controls guide: start, stop, restart, unavailable actions | Medium | 4 h |
-| [ ] Write metrics guide: CPU, memory, disk, polling delay, stale data | Medium | 3 h |
-| [ ] Write web terminal guide with safety notes and troubleshooting | High | 6 h |
-| [ ] Write snapshots guide focused on what user role can see/do | Medium | 4 h |
-| [ ] Write instance domain and proxy settings docs based on user-visible controls | High | 6 h |
-| [ ] Add instance troubleshooting matrix | Medium | 4 h |
+| [x] Write Instances overview and "what you can do with user access" page | Medium | 3 h |
+| [x] Write view/filter/search assigned instances page | Low | 2 h |
+| [x] Write instance status guide with user-friendly meanings and waiting states | Medium | 4 h |
+| [x] Write lifecycle controls guide: start, stop, restart, unavailable actions | Medium | 4 h |
+| [x] Write metrics guide: CPU, memory, disk, polling delay, stale data | Medium | 3 h |
+| [x] Write web terminal guide with safety notes and troubleshooting | High | 6 h |
+| [x] Write snapshots guide focused on what user role can see/do | Medium | 4 h |
+| [x] Write instance domain and proxy settings docs based on user-visible controls | High | 6 h |
+| [x] Add instance troubleshooting matrix | Medium | 4 h |
 
 Stage estimate: 36 hours.
 
