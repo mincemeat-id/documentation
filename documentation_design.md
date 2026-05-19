@@ -412,16 +412,16 @@ Goal: Deliver the most comprehensive documentation set for Static Sites.
 
 | Task | Complexity | Estimate |
 | --- | --- | --- |
-| [ ] Write Static Sites overview and mental model: site, deployment, active deployment, domain | Medium | 4 h |
-| [ ] Write create static site guide | Medium | 3 h |
-| [ ] Write upload deployment guide for single HTML and zip archives | Medium | 5 h |
-| [ ] Write GitHub connection guide with GitHub App install, repo selection, branch, root directory, and no-build behavior | High | 8 h |
-| [ ] Write deployment history, pipeline status, and failed deployment troubleshooting | High | 7 h |
-| [ ] Write activate and rollback deployment guide | Medium | 4 h |
-| [ ] Write shared subdomain guide | Medium | 3 h |
-| [ ] Write custom domain guide for subdomain and apex flows | High | 8 h |
-| [ ] Write SPA fallback, redirects, headers, and custom 404 docs | High | 8 h |
-| [ ] Add Static Sites troubleshooting matrix and support checklist | Medium | 5 h |
+| [x] Write Static Sites overview and mental model: site, deployment, active deployment, domain | Medium | 4 h |
+| [x] Write create static site guide | Medium | 3 h |
+| [x] Write upload deployment guide for single HTML and zip archives | Medium | 5 h |
+| [x] Write GitHub connection guide with GitHub App install, repo selection, branch, root directory, and no-build behavior | High | 8 h |
+| [x] Write deployment history, pipeline status, and failed deployment troubleshooting | High | 7 h |
+| [x] Write activate and rollback deployment guide | Medium | 4 h |
+| [x] Write shared subdomain guide | Medium | 3 h |
+| [x] Write custom domain guide for subdomain and apex flows | High | 8 h |
+| [x] Write SPA fallback, redirects, headers, and custom 404 docs | High | 8 h |
+| [x] Add Static Sites troubleshooting matrix and support checklist | Medium | 5 h |
 
 Stage estimate: 55 hours.
 
