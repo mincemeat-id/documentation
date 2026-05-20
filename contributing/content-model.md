@@ -43,7 +43,7 @@ category: static-sites
 audience: user
 updated: 2026-05-18
 related:
-  - /domains/dns-basics
+  - /account/sign-in
   - /static-sites/shared-subdomains
 ---
 ```
