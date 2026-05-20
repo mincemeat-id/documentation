@@ -3,7 +3,7 @@ title: Upload a deployment
 description: Deploy a static site by uploading a single HTML file or a zip archive containing your site files.
 category: static-sites
 audience: user
-updated: 2026-05-18
+updated: 2026-05-20
 related:
   - /static-sites/create-site
   - /static-sites/deployment-history
@@ -21,8 +21,7 @@ complete site with assets.
 - You must be signed in.
 - You must have an existing static site. If you have not created one
   yet, see [Create a site](/static-sites/create-site).
-- Your files must be pre-built. Mincemeat does not run build commands
-  — upload the final output from your build tool.
+- Your files must be pre-built. Manual uploads do not support the Mincemeat Build Engine — you must compile your project locally and upload the final static output. (For automatic server-side builds, use a [GitHub Deployment](/static-sites/github-deployments)).
 
 ## Upload a single HTML file
 

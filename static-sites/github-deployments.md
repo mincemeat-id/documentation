@@ -3,7 +3,7 @@ title: Deploy from GitHub
 description: Connect a GitHub repository to your static site through the Mincemeat GitHub App for automatic deployments on push.
 category: static-sites
 audience: user
-updated: 2026-05-18
+updated: 2026-05-20
 related:
   - /static-sites/create-site
   - /static-sites/deployment-history
@@ -12,12 +12,12 @@ related:
 
 # Deploy from GitHub
 
-Connect a GitHub repository to your static site so Mincemeat deploys
-your files automatically when you push to your production branch.
-Mincemeat uses a **no-build** model — the files in your repository
-are treated as ready-to-serve static content. If your project uses a
-build tool, run the build in your own CI pipeline and commit or push
-the output.
+Connect a GitHub repository to your static site so Mincemeat deploys your files automatically when you push to your branch.
+
+Mincemeat supports two deployment modes for GitHub sources:
+
+- **Build Engine**: Automatically compiles your site from source code (e.g., Astro, Vite, Hugo, VitePress) on Mincemeat's servers whenever you push.
+- **No-Build**: Deploys pre-compiled static files from your repository directly. Useful if you prefer running builds in your own external CI pipeline.
 
 ## Before you start
 
@@ -82,8 +82,34 @@ your code, create branches, or open pull requests.
    the selected branch triggers a deployment automatically.
 8. Select **Connect**.
 
-Mincemeat queues an initial deployment pipeline. You can follow its
-progress in the pipeline detail view.
+Mincemeat queues an initial deployment pipeline. You can follow its progress in the pipeline detail view.
+
+## Build configuration
+
+If your site requires a build, Mincemeat automatically classifies the repository on deployment (for example, if a `package.json` or Hugo configuration file is present).
+
+You can customize how Mincemeat builds your site by selecting the **Build** tab in the site detail view:
+
+- **Root Directory** — The subfolder in your repository containing your site's source code (defaults to the repository root `.`). Must reside within the repository.
+- **Framework Override** — Force Mincemeat to use a specific framework's build settings. Supported options include: `Astro`, `Vite`, `Eleventy`, `Docusaurus`, `VitePress`, `VuePress`, `Gatsby`, `Hugo`, `Next.js (static export)`, `Nuxt (static generate)`, `SvelteKit (static)`, `Generic`, or `Auto detect` (default).
+  - *Note*: Next.js sites must be configured for static export (`output: 'export'`), and Nuxt sites must be configured for static generation.
+- **Build Command** — The command Mincemeat runs to build your site (e.g. `npm run build`).
+- **Output Directory** — The folder containing your compiled static assets (e.g. `dist`, `build`, `.vitepress/dist`).
+- **Node Version** — The Node.js version used for the compilation (defaults to Node `22`).
+- **Build Cache** — Toggle dependency caching (such as `node_modules`). Caching is enabled by default to speed up subsequent builds.
+
+### Clear build cache
+
+If your build dependencies become corrupted or you want a completely fresh run, you can select the **Reset cache** button in the **Build** settings tab. This invalidates and removes the build cache across all online build engines.
+
+## Environment variables and secrets
+
+If your build process depends on environment variables (such as API keys or build-time configurations), you can define them in the **Environment** tab:
+
+- **Key Formatting** — Secret keys must consist of uppercase letters, numbers, and underscores only, matching the pattern `[A-Z_][A-Z0-9_]{0,127}`.
+- **Reserved Prefixes** — To prevent platform conflicts, keys cannot start with: `MINCEMEAT_`, `BUILD_ENGINE_`, `GITHUB_`, `AWS_`, `S3_`, `CF_`, or `CLOUDFLARE_`.
+- **Size Limits** — Individual secrets are capped at 16 KiB, and the total environment payload for a single build cannot exceed 128 KiB.
+- **Write-Only Security** — Environment variables are stored encrypted with AES-256-GCM. Once saved, they are write-only and cannot be read back through the dashboard or API. You can overwrite or delete them at any time.
 
 ## Pipeline stages
 
@@ -93,8 +119,9 @@ Each GitHub deployment runs through a series of stages:
 | --- | --- |
 | **Prepare** | Mincemeat verifies App access to the repository and resolves the commit. |
 | **Fetch** | The repository content is downloaded from GitHub. |
-| **Validate** | The archive is checked for structure, size, and safety — the same rules as zip uploads. The publish directory must contain `index.html`. |
-| **Upload** | Files from the publish directory are uploaded to storage under an immutable deployment path. |
+| **Validate** | The project structure is validated. Mincemeat detects if a build is required, verifies paths, and checks files against platform safety limits. |
+| **Build** | If a build is required or configured, Mincemeat dispatches the job to a build engine. This stage streams compilation logs in real time, and is skipped for no-build deployments. |
+| **Upload** | Built or extracted files are validated and uploaded to immutable storage. |
 | **Activate** | The new deployment becomes active and your site starts serving the new content. |
 | **Finalise** | The deployment is marked as successful and the previous active deployment is superseded. |
 
@@ -184,7 +211,12 @@ Automatic deployments stop until you restore access.
 | GitHub account or organisation is not shown during install | Make sure you have permission to install Apps on that account. Organisation owners or members with App manager rights can install Apps. |
 | Repository is missing from the picker | Check that the repository is included in the App installation. Go to GitHub → Settings → Applications → Mincemeat and confirm repository access. |
 | Pipeline fails in Prepare | The App may have lost access to the repository. Check the App installation and restore repository access. |
-| Pipeline fails in Validate | The publish directory may not contain `index.html`, or the archive exceeds size or file count limits. |
+| Pipeline fails in Validate | The publish directory may not contain `index.html`, the archive exceeds size/file limits, or the project contains invalid configuration files (e.g. malformed `package.json`). |
+| Pipeline fails in Build with `NO_ENGINE_AVAILABLE` | No build engine agents are currently online. Contact your administrator or try deploying again later. |
+| Pipeline fails in Build with `NO_ENGINE_AVAILABLE_TIMEOUT` | Build engines are saturated. The job waited in the queue for more than 30 minutes. |
+| Pipeline fails in Build with a command error | The build command failed (exited with non-zero status). Select the stage to view the compilation logs and troubleshoot the syntax or configuration error. |
+| Next.js build fails | Verify your Next.js site configuration is set for static export (`output: 'export'`). Server-side rendered pages are not supported. |
+| Nuxt build fails | Verify your Nuxt configuration is set for static generation, and the build script runs `nuxt generate`. |
 | Automatic deployments are not triggering | Confirm **Auto deploy** is enabled and you are pushing to the configured branch. Check the pipeline list for any recent cancelled or failed pipelines. |
 | Connection shows as broken | Restore the GitHub App installation and repository access, then redeploy. See [Broken connections](#broken-connections) above. |
 

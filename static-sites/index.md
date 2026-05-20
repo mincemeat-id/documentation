@@ -3,7 +3,7 @@ title: Static Sites
 description: Host static websites on Mincemeat with upload or GitHub deployments, immutable versioning, shared subdomains, and custom domains.
 category: static-sites
 audience: user
-updated: 2026-05-18
+updated: 2026-05-20
 related:
   - /get-started/
   - /domains/
@@ -58,7 +58,7 @@ validation process before they start serving traffic.
 | --- | --- |
 | Create a site | Choose a name and slug, configure SPA and header settings. |
 | Upload a deployment | Deploy a single HTML file or a zip archive containing your site files. |
-| Deploy from GitHub | Connect a GitHub repository through the Mincemeat GitHub App. Pushes to your production branch deploy automatically. |
+| Deploy from GitHub | Connect a GitHub repository through the Mincemeat GitHub App. Pushes to your production branch compile automatically via the Build Engine, or deploy directly using No-Build. |
 | View deployment history | See every deployment with its version, status, timestamp, and file count. |
 | Activate and roll back | Switch the active deployment to any previous version instantly. |
 | Use a shared subdomain | Your site is available at `your-slug.mincemeat.app` immediately. |
@@ -69,15 +69,23 @@ validation process before they start serving traffic.
 
 ## How deployments work
 
-Mincemeat uses a **no-build** deployment model. Whether you upload a
-zip or connect a GitHub repository, Mincemeat treats your files as
-ready-to-serve static content. There is no build step — frameworks
-like Next.js, Vite, or Hugo must be built locally or in your own CI
-pipeline before the output is uploaded or pushed.
+Mincemeat supports two deployment workflows:
 
-When a deployment succeeds, Mincemeat stores the files under an
-immutable path and updates the active deployment pointer. The previous
-deployment remains available for rollback.
+### No-Build deployments
+
+In the **no-build** model, Mincemeat treats your files as ready-to-serve static content. This is the only method supported for manual file uploads (HTML or ZIP), and can also be used for GitHub repositories if you prefer to build your site in your own external CI pipeline.
+
+### Build Engine deployments
+
+For GitHub-connected repositories, Mincemeat features an integrated **Build Engine**. When you push to your configured branch, the Build Engine automatically downloads your source files, detects your framework, provisions the appropriate runtime (e.g. Node.js), runs your build command, and deploys the generated output.
+
+Supported frameworks include:
+
+- Astro, Vite, Eleventy, Docusaurus, VitePress, VuePress, Gatsby, Hugo, Next.js (configured for static export), Nuxt (configured for static generation), and SvelteKit (static).
+
+You can configure build commands, customize publish directories, manage secret environment variables, and enable build caching under your site's settings.
+
+When a deployment succeeds under either model, Mincemeat stores the files under an immutable path and updates the active deployment pointer. The previous deployment remains available for rollback.
 
 ## Getting started
 

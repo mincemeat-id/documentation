@@ -3,7 +3,7 @@ title: Deployment troubleshooting
 description: Diagnose and fix common issues with static site deployments, GitHub connections, and upload failures.
 category: troubleshooting
 audience: user
-updated: 2026-05-19
+updated: 2026-05-20
 related:
   - /static-sites/upload-deployment
   - /static-sites/github-deployments
@@ -92,18 +92,19 @@ previous version.
 
 **What to check**:
 
-1. The repository contains build-ready static files. Mincemeat does not
-   run a build step.
-2. The root directory setting points to the correct folder if your
-   static files are in a subdirectory.
-3. There are no large files exceeding size limits.
+1. **Build Engine vs No-Build**: Confirm whether your site is configured to build automatically on Mincemeat or is expected to be pre-built (No-Build). You can check and adjust this under the **Build** tab.
+2. **Build logs**: If the failure occurs during the `Build` stage, select the stage in the dashboard to view the real-time compilation log. This will show compiler/syntax errors, package manager failures, or missing dependencies.
+3. **Framework configuration**:
+   - For **Next.js** sites, ensure `output: 'export'` is set in your config. Dynamic SSR sites are not supported.
+   - For **Nuxt** sites, ensure your build command runs `nuxt generate`.
+4. **Environment variables**: If your build depends on keys or configurations, make sure they are defined in the **Environment** tab.
+5. **Platform capacity**: If the stage fails with `NO_ENGINE_AVAILABLE` or `NO_ENGINE_AVAILABLE_TIMEOUT`, all build engine agents are offline or busy.
 
 **Fix**:
 
-1. Build your site locally or in your own CI pipeline before pushing.
-2. Update the root directory setting in Mincemeat if your files are in
-   a subfolder like `dist/` or `build/`.
-3. Remove or reduce oversized files.
+1. Correct any compilation or configuration errors shown in the build logs.
+2. Verify you have set up write-only environment variables correctly under the **Environment** tab if they are needed for compilation.
+3. Contact your platform administrator if the logs indicate that no build engines are available.
 
 ## Deployment history issues
 

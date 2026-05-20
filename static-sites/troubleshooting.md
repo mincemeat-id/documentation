@@ -3,7 +3,7 @@ title: Static Sites troubleshooting
 description: Diagnose and resolve common static site problems including deployments, domains, SPA fallback, and serving issues.
 category: static-sites
 audience: user
-updated: 2026-05-19
+updated: 2026-05-20
 related:
   - /static-sites/
   - /troubleshooting/correlation-ids
@@ -39,9 +39,23 @@ resolve them.
 | GitHub account not shown during install | Insufficient permissions. | You need permission to install Apps on that account. Organisation owners or members with App manager rights can install Apps. |
 | Repository missing from picker | Not included in App installation. | Go to GitHub → Settings → Applications → Mincemeat and confirm repository access. |
 | Pipeline fails in Prepare | Lost repository access. | Check the App installation and restore repository access. |
-| Pipeline fails in Validate | Missing `index.html` or limits exceeded. | Verify your publish directory contains `index.html` and files are within size limits. |
+| Pipeline fails in Validate | Missing `index.html`, path limits exceeded, or malformed config. | Verify your publish directory contains `index.html` and configuration files (like `package.json`) are valid. |
 | Auto-deploy not triggering | Auto-deploy disabled or wrong branch. | Confirm **Auto deploy** is enabled and you are pushing to the configured branch. |
 | Connection shows as broken | App uninstalled or access revoked. | Restore the GitHub App installation, then redeploy. |
+
+## Build Engine and compilation problems
+
+| Problem | Possible cause | What to do |
+| --- | --- | --- |
+| Pipeline fails in Validate with `BUILD_ROOT_MISSING` | Configure root directory does not exist. | Verify the **Root Directory** path in your Build tab settings matches your repository structure. |
+| Pipeline fails in Validate with `PACKAGE_JSON_INVALID` | The `package.json` file is malformed. | Check the JSON syntax of your `package.json` file in your repository. |
+| Pipeline fails in Validate with `NEXTJS_REQUIRES_EXPORT` | Next.js is configured for dynamic SSR. | Update your `next.config.js` or `next.config.mjs` to set `output: 'export'`. SSR is not supported. |
+| Pipeline fails in Validate with `NUXT_REQUIRES_GENERATE` | Nuxt is not using static generation. | Ensure your Nuxt build script or build command uses `nuxt generate`. |
+| Pipeline fails in Build with `NO_ENGINE_AVAILABLE` | No build engine agents are online. | Contact your administrator to ensure build engine agents are running and healthy. |
+| Pipeline fails in Build with `NO_ENGINE_AVAILABLE_TIMEOUT` | Saturated queue timed out. | The build sat in the queue for 30 minutes. Retry the deployment or contact your administrator to check capacity. |
+| Pipeline fails in Build with command error | The build command exited with a non-zero code. | Select the Build stage to inspect the live compilation logs. Fix the compiler/syntax errors in your code and push again. |
+| Build fails due to missing API keys | Missing environment variables. | Define the missing variables as write-only keys in the **Environment** tab, then redeploy. |
+| Secret variable is rejected on save | Invalid key format or reserved prefix. | Ensure keys match `[A-Z_][A-Z0-9_]{0,127}` and do not start with reserved prefixes like `MINCEMEAT_`, `GITHUB_`, `AWS_`, or `S3_`. |
 
 ## Domain problems
 

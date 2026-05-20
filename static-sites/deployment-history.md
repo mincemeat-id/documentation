@@ -3,7 +3,7 @@ title: Deployment history
 description: View your static site deployment history, monitor pipeline status, and understand deployment states.
 category: static-sites
 audience: user
-updated: 2026-05-19
+updated: 2026-05-20
 related:
   - /static-sites/upload-deployment
   - /static-sites/github-deployments
@@ -81,8 +81,9 @@ each stage in real time.
 | --- | --- |
 | **Prepare** | Mincemeat verifies App access and resolves the commit. |
 | **Fetch** | Repository content is downloaded from GitHub. |
-| **Validate** | Files are checked for structure, size, and safety. |
-| **Upload** | Files are uploaded to storage under an immutable path. |
+| **Validate** | Project structure is validated. Mincemeat detects if a build is needed, verifies path/size limits, and checks for unsafe files. |
+| **Build** | If a build is configured or detected, the Build Engine compiles the site, streams logs, and handles build caching. This stage is skipped for no-build sites. |
+| **Upload** | Built or fetched files are uploaded to storage under an immutable path. |
 | **Activate** | The new deployment becomes the active version. |
 | **Finalise** | The deployment is marked as successful and the previous version is superseded. |
 
