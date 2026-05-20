@@ -1,4 +1,5 @@
 import { defineConfig } from 'vitepress'
+import llmstxt from 'vitepress-plugin-llms'
 import {
   buildAnalyticsHead,
   buildSeoHead,
@@ -11,6 +12,22 @@ import {
 } from './seo'
 
 export default defineConfig({
+  vite: {
+    plugins: [
+      llmstxt({
+        domain: siteOrigin,
+        title: 'Mincemeat Docs',
+        description: siteDescription,
+        ignoreFiles: [
+          'README.md',
+          'CONTRIBUTING.md',
+          'SECURITY.md',
+          'AGENTS.md',
+          'documentation_design.md',
+        ],
+      }),
+    ],
+  },
   title: 'Mincemeat Docs',
   titleTemplate: ':title | Mincemeat Docs',
   description: siteDescription,
