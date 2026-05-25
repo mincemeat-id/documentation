@@ -37,6 +37,7 @@ maintaining web applications without managing infrastructure directly.
   metrics, use the web terminal, and manage proxy settings.
 - **Static Sites**: Host websites with upload or GitHub deployments,
   connect custom domains, and roll back to previous versions.
+- **Headless CMS**: Create content collections and fields, manage media assets, and fetch dynamic schemas and entries via edge-cached REST APIs.
 - **Domains**: Connect custom domains with automatic SSL and DNS
   validation.
 - **Account**: Manage your password, two-factor authentication, and

@@ -34,6 +34,10 @@ your content on a shared subdomain or your own custom domain. Every
 deployment is immutable, so you can roll back to any previous version
 instantly.
 
+### Headless CMS
+
+The Mincemeat Headless CMS brings structured content management to the platform. Define your content schemas, collections, and fields through the dashboard UI. Retrieve entries, manage files in the media library, and serve dynamic content at the edge with fast responses and automatic static site rebuilds via webhooks.
+
 ### Domains
 
 Connect custom domains to your instances or static sites. Mincemeat

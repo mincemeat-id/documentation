@@ -51,15 +51,17 @@ The dashboard shows your assigned resources:
 - **Cloud Instances**: Any instances assigned to your account.
 - **Static Sites**: Any static sites you have created or been granted
   access to.
+- **Headless CMS**: Any content management projects you have created or have access to.
 
 Click on a resource to view its details, status, and configuration.
 
-### 4. Deploy your first resource
+### 4. Deploy or set up your first resource
 
 Depending on what your administrator has assigned, you can:
 
 - **Create a static site**: Go to Static Sites and select
   [Create a site](/static-sites/create-site).
+- **Set up a Headless CMS project**: Go to Headless CMS to create a project and design a collection.
 - **View your instances**: Go to Instances and select
   [View your instances](/instances/view-instances).
 

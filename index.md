@@ -25,6 +25,9 @@ features:
   - title: Static Sites
     details: Create a site, deploy from GitHub or upload, manage deployments, and connect a custom domain.
     link: /static-sites/
+  - title: Headless CMS
+    details: Define custom content collections and fields, manage media assets, and query your content via REST APIs.
+    link: /headless-cms/
   - title: Domains
     details: Connect custom domains, validate DNS, and understand proxy and cache behavior.
     link: /domains/

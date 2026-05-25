@@ -28,6 +28,7 @@ const ALLOWED_CATEGORIES = new Set([
   'domains',
   'troubleshooting',
   'contributing',
+  'headless-cms',
 ])
 
 const ALLOWED_AUDIENCES = new Set(['user', 'contributor'])
