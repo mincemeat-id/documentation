@@ -19,7 +19,7 @@ Once your design is complete, publishing the schema creates and updates the unde
 ## Before you start
 
 - You must be signed in to your Mincemeat account.
-- You must have a CMS project. If you do not have one, select **New Project** on the CMS dashboard and provide a name and unique slug.
+- You must have a CMS project. If you do not have one, click **Add CMS Project** in the Headless CMS Hub and follow the wizard to name and configure the project.
 
 ## Supported field types
 
@@ -41,11 +41,10 @@ You can customize your collections with the following field types:
 To allow you to add fields quickly without locking your database or slowing down requests, Mincemeat uses a **Hybrid Schema design**:
 
 - **Non-filterable fields**: When you add standard fields, their values are saved inside a single JSON document block (`data` column). This makes adding or removing fields instantaneous—it does not touch your database tables directly.
-- **Filterable/Sortable fields**: If you toggle **Filterable** (`is_filterable: true`) on a field, Mincemeat generates a virtual column and a database index for it during publishing:
+- **Filterable/Sortable fields**: If you toggle **Filterable** (`is_filterable: true`) on a field, Mincemeat generates a SQLite expression index for it during publishing:
 
   ```sql
-  ALTER TABLE entries ADD COLUMN f_{collection}_{field} AS (json_extract(data, '$.{field}')) STORED;
-  CREATE INDEX idx_{collection}_{field} ON entries(collection, f_{collection}_{field});
+  CREATE INDEX IF NOT EXISTS idx_{collection}_{field} ON entries(collection, locale, json_extract(data, '$.{field}'));
   ```
 
   This ensures that when you filter or sort by this field in your API queries, the database uses an index rather than scanning every document.
@@ -60,14 +59,14 @@ Follow these steps to create a collection and define its fields:
 
 ### Step 1: Create a collection
 
-1. Open the CMS dashboard and select your project.
-2. Go to **Schema** and select **New Collection**.
+1. Open the **Headless CMS** Hub from the main sidebar.
+2. Click **Open Workspace** on your project, go to the **Schema** tab, and select **New Collection**.
 3. Enter a **Name** (e.g., `Blog Posts`) and a **Slug** (e.g., `posts`). The slug will be used in your REST API endpoints.
 4. Select **Create**.
 
 ### Step 2: Add fields
 
-1. Select your new collection in the sidebar.
+1. In the **Schema** tab, select your new collection from the collection list.
 2. Select **Add Field**.
 3. Enter a field name, slug, and choose the **Field Type**.
 4. In the settings panel:

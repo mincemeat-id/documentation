@@ -28,7 +28,7 @@ Every content entry moves through a defined set of states:
                        |     Trashed     |
                        +--------+--------+
                                 |
-                                | 90-day purge
+                                | 30-day purge
                                 v
                        +-----------------+
                        | Permanently Lost|
@@ -46,8 +46,8 @@ Every content entry moves through a defined set of states:
 
 ## Steps: Create and publish an entry
 
-1. Open your project in the CMS dashboard.
-2. Go to the **Content** tab and select the collection you want to update from the sidebar.
+1. Open the **Headless CMS** Hub from the main sidebar.
+2. Select **Open Workspace** on your project, go to the **Content** tab, and select a collection.
 3. Select **New Entry**.
 4. Fill in the values for each field defined in your schema. Any validation rules (e.g., character length limits or required fields) are checked as you type.
 5. Select **Save Draft**. The entry is saved with a status of `draft`.
@@ -62,7 +62,7 @@ Editing a published entry updates the record. If you want to make changes but ke
 Mincemeat protects your content from accidental deletion using a soft-delete mechanism:
 
 - **Soft-Deletion**: When you select **Delete** on an entry, the platform sets a `deleted_at` timestamp and marks its status as `trashed`.
-- **Trash Bin**: Trashed items are visible only in the **Trash** tab on your project dashboard.
+- **Trash Bin**: Trashed items are visible only in the **Trash** tab on your project workspace.
 - **Restoring**: You can select any trashed entry and select **Restore** to return it to a `draft` status in its original collection.
 - **Permanent Purges**: If you select **Delete Permanently**, the record is hard-deleted from the database and any linked media variant files are removed during the next asset cleanup run.
 
@@ -70,8 +70,8 @@ Mincemeat protects your content from accidental deletion using a soft-delete mec
 
 Mincemeat runs a scheduled cleanup task every night:
 
-- By default, trashed entries are permanently deleted after **90 days**.
-- Project administrators can adjust this retention window under **Settings → Retention** to any duration between **7 days** and **365 days**.
+- By default, trashed entries are permanently deleted after **30 days**.
+- Project administrators can adjust this retention window under the **Operations** tab (Trash policy settings) to any duration between **7 days** and **365 days**.
 - Once the retention window passes, the entries are permanently purged from the database and cannot be recovered.
 
 ## Related

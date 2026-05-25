@@ -46,11 +46,12 @@ To prevent loss of delivery notifications during destination server outages, Min
 
 If you want content changes to trigger a static site rebuild on Mincemeat automatically:
 
-1. Under **Settings → Webhooks**, select **Create Webhook**.
-2. Select the **Trigger Rebuild** preset.
-3. Choose the target static site from the dropdown list.
-4. Mincemeat configures a special internal URL: `mincemeat://static-sites/{site_id}`.
-5. Whenever a content publish event occurs, the webhooks engine translates this URL and triggers a new deployment pipeline for your static site.
+1. Open the project workspace in the Headless CMS Hub and go to the **Operations** tab.
+2. Under the **Webhooks** section, select **Create Webhook**.
+3. Select the **Trigger Rebuild** preset.
+4. Choose the target static site from the dropdown list.
+5. Mincemeat configures a special internal URL: `mincemeat://static-sites/{site_id}`.
+6. Whenever a content publish event occurs, the webhooks engine translates this URL and triggers a new deployment pipeline for your static site.
 
 ---
 
@@ -72,12 +73,10 @@ Exports contain the *metadata* index for media files (allowing you to rebuild da
 
 ### Steps: Export project data
 
-1. Go to the CMS dashboard and select your project.
-2. Select **Settings** and choose **Backups & Export**.
-3. Select **Create Export**.
-4. The control plane enqueues a background task to package your database tables.
-5. Once complete, a download link is generated.
-6. Select **Download Export**.
+1. Open the project workspace in the Headless CMS Hub and select the **Operations** tab.
+2. Under the **Data Export** section, select **Create Export**.
+3. The control plane enqueues a background task to package your database tables.
+4. Once the export is generated, click **Download** next to the export record in the export history table.
 
 The download link is signed and remains valid for **24 hours** before expiring.
 

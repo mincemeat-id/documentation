@@ -35,14 +35,12 @@ API keys are restricted by scopes to limit potential damage if a key is exposed:
 | `write` | Create entries, save drafts, publish content, upload media, and soft-delete entries. | Content editor dashboards or private integration scripts. |
 | `admin` | Full CRUD operations plus utility controls like purging edge caches. | DevOps tools, build systems, or database migrations. |
 
-You can also restrict keys to **allowed collections** so a key can only access specific slugs (e.g., a key that is only allowed to access `posts` but not `users`).
-
 ## Cross-Origin Resource Sharing (CORS)
 
 CORS is a browser security mechanism that prevents web pages from making API requests to a different domain unless explicitly allowed.
 
 - **Deny-by-Default**: Mincemeat denies all cross-origin requests by default. If a client app running at `https://my-app.example.com` attempts to query your CMS endpoint without a configured CORS origin, the browser blocks the response.
-- **CORS Configuration**: You can list approved origins (such as `https://example.com` or local dev URLs like `http://localhost:3000`) on your project settings. Wildcards (such as `*`) are allowed but not recommended for production keys.
+- **CORS Configuration**: You can configure approved origins (such as `https://example.com` or local dev URLs like `http://localhost:3000`) globally for your project under the **API Keys & CORS** tab. Wildcards (such as `*`) are allowed but not recommended for production.
 
 ::: danger Keep Secrets Safe
 Never check `write` or `admin` API keys into source repositories or bundle them in client-side code. Use `public-read` keys for public frontend apps, and keep write keys strictly on secure server environments.
@@ -50,16 +48,15 @@ Never check `write` or `admin` API keys into source repositories or bundle them 
 
 ## Steps: Create an API Key
 
-1. Go to the CMS dashboard and select your project.
-2. Select **Settings** and choose **API Keys**.
-3. Select **Create Key**.
-4. Configure the key:
+1. Open the **Headless CMS** Hub from the main sidebar.
+2. Select **Open Workspace** on your project card.
+3. Select the **API Keys & CORS** tab.
+4. Select **Create Key**.
+5. Configure the key:
    - Provide a descriptive **Name** (e.g., `Production Read Key`).
    - Select the required **Scope** (e.g., `public-read`).
-   - Choose the allowed collections (default is all).
-   - Enter one or more **Allowed Origins** for CORS validation (one per line).
-5. Select **Generate Key**.
-6. Copy the displayed key immediately and save it in a secure credential manager or environment file.
+6. Select **Generate Key**.
+7. Copy the displayed key immediately and save it in a secure credential manager or environment file.
 
 ## Related
 
