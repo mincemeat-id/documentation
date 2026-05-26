@@ -3,7 +3,7 @@ title: Schema Designer
 description: Create CMS projects, configure collections, define field types, and publish database schemas.
 category: headless-cms
 audience: user
-updated: 2026-05-25
+updated: 2026-05-26
 related:
   - /headless-cms/index
   - /headless-cms/content-management
@@ -60,35 +60,46 @@ Follow these steps to create a collection and define its fields:
 ### Step 1: Create a collection
 
 1. Open the **Headless CMS** Hub from the main sidebar.
-2. Click **Open Workspace** on your project, go to the **Schema** tab, and select **New Collection**.
-3. Enter a **Name** (e.g., `Blog Posts`) and a **Slug** (e.g., `posts`). The slug will be used in your REST API endpoints.
-4. Select **Create**.
+2. Click **Open Workspace** on your project. You will automatically land on the **Collections** workspace tab.
+3. In the left sidebar of the Collections view, select **+ New** next to the Collections header.
+4. You can choose to design a custom collection or select a **Preset Template**:
+   - **Preset Templates**: Predefined content schemas for standard use cases (such as a *Blog*, *Contact Form*, or *Job Listing*). Selecting a preset automatically pre-seeds the collection with recommended fields.
+5. Enter a **Name** (e.g., `Blog Posts`) and a **Slug** (e.g., `posts`). The slug is used in your REST API endpoints.
+6. Select **Create** or **Import**.
 
-### Step 2: Add fields
+### Step 2: Add and manage fields
 
-1. In the **Schema** tab, select your new collection from the collection list.
-2. Select **Add Field**.
-3. Enter a field name, slug, and choose the **Field Type**.
-4. In the settings panel:
-   - Configure any validation rules (such as marking the field as required).
+1. Select your collection from the left sidebar of the **Collections** tab.
+2. In the top-right corner of the workspace pane, ensure the view toggle is set to **Schema Designer**.
+3. Select **+ Add Field**.
+4. Enter a field name, slug, and choose the **Field Type**.
+5. In the field settings panel:
+   - Configure validation rules (such as marking the field as required).
    - Toggle **Filterable** if you plan to search or sort by this field.
-5. Select **Save Field**.
-6. Repeat for any other fields you want to define.
+   - Toggle **Localized** if this field should support translated values for enabled project languages (i18n).
+6. Select **Save Field**.
+7. Repeat this process for any other fields you want to define.
+
+::: tip Reordering and Editing Fields
+
+- **Reordering**: You can drag and drop fields in the Schema Designer list to change their display order (`order_index`).
+- **Editing / Deletion**: Click on any field name in the designer view to modify its validations, toggle search indexes, or permanently delete the field schema from draft status.
+:::
 
 ### Step 3: Publish changes
 
-Your changes are stored as a draft until you publish them.
+Your schema changes are stored as a draft until you publish them.
 
-1. Review your collection layout in the designer.
-2. Select **Publish Schema** in the top-right corner.
-3. Mincemeat increments your project's active schema version, runs the DDL migrations on D1 SQLite, and clears the edge caches.
+1. Review your collection layouts and fields.
+2. Select the **Publish Schema** button at the bottom of the left collections sidebar.
+3. Mincemeat increments your project's active schema version, executes SQLite DDL statements on your edge database, and invalidates global CDN caches.
 
 ## What happens next
 
 Once published:
 
 - The REST API matches your new structure.
-- You can begin creating content entries in the **Content** tab.
+- You can begin creating content entries by toggling the workspace view from **Schema Designer** to **Entries**.
 - Your public OpenAPI specification is automatically regenerated at `https://{project}.cms.mincemeat.app/v1/{project}/openapi.json`.
 
 ## Related

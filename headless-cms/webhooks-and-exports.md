@@ -3,7 +3,7 @@ title: Webhooks & Exports
 description: Set up content webhooks, verify signatures, configure static site rebuild presets, and run data exports.
 category: headless-cms
 audience: user
-updated: 2026-05-25
+updated: 2026-05-26
 related:
   - /headless-cms/index
   - /headless-cms/content-management
@@ -42,16 +42,18 @@ To prevent loss of delivery notifications during destination server outages, Min
 
   Your receiving server should compute the same signature using your secret to verify that the request originated from Mincemeat.
 
-### Static site rebuild preset
+### Static site rebuild configuration
 
 If you want content changes to trigger a static site rebuild on Mincemeat automatically:
 
-1. Open the project workspace in the Headless CMS Hub and go to the **Operations** tab.
-2. Under the **Webhooks** section, select **Create Webhook**.
-3. Select the **Trigger Rebuild** preset.
-4. Choose the target static site from the dropdown list.
-5. Mincemeat configures a special internal URL: `mincemeat://static-sites/{site_id}`.
-6. Whenever a content publish event occurs, the webhooks engine translates this URL and triggers a new deployment pipeline for your static site.
+1. Open the project workspace in the Headless CMS Hub and go to the **Settings** workspace tab.
+2. Select the **Webhooks** sub-tab.
+3. Under the **Add Webhook Endpoint** section, configure the webhook:
+   - **Webhook Name**: Provide a descriptive name (e.g., `Static Site Rebuild`).
+   - **Secret Signing Key**: Optional key to sign the requests.
+   - **Target URL**: The build hook URL of your deployment service. To rebuild a Mincemeat static site directly, target `mincemeat://static-sites/{site_id}` using the static site API.
+   - **Trigger Events**: Comma-separated list of triggers (e.g. `entry.published`).
+4. Select **Create Webhook**.
 
 ---
 
@@ -73,10 +75,11 @@ Exports contain the *metadata* index for media files (allowing you to rebuild da
 
 ### Steps: Export project data
 
-1. Open the project workspace in the Headless CMS Hub and select the **Operations** tab.
-2. Under the **Data Export** section, select **Create Export**.
-3. The control plane enqueues a background task to package your database tables.
-4. Once the export is generated, click **Download** next to the export record in the export history table.
+1. Open the project workspace in the Headless CMS Hub and select the **Settings** workspace tab.
+2. Choose the **Data Export** sub-tab from the settings menu.
+3. Select **Trigger Export**.
+4. The control plane enqueues a background task to package your database tables.
+5. Once the export is generated and ready, click **Get Link** next to the export record in the export history table to download it.
 
 The download link is signed and remains valid for **24 hours** before expiring.
 
