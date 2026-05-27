@@ -106,13 +106,25 @@ export default defineConfig({
     },
     nav: [
       { text: 'Get Started', link: '/get-started/', activeMatch: '/get-started/' },
+      {
+        text: 'Features',
+        activeMatch: '^/(instances|static-sites|headless-cms|domains)/',
+        items: [
+          { text: 'Cloud Instances', link: '/instances/' },
+          { text: 'Static Sites', link: '/static-sites/' },
+          { text: 'Headless CMS', link: '/headless-cms/' },
+          { text: 'Custom Domains', link: '/domains/' },
+        ],
+      },
       { text: 'Account', link: '/account/', activeMatch: '/account/' },
-      { text: 'Instances', link: '/instances/', activeMatch: '/instances/' },
-      { text: 'Static Sites', link: '/static-sites/', activeMatch: '/static-sites/' },
-      { text: 'Headless CMS', link: '/headless-cms/', activeMatch: '/headless-cms/' },
-      { text: 'Domains', link: '/domains/', activeMatch: '/domains/' },
-      { text: 'Troubleshooting', link: '/troubleshooting/', activeMatch: '/troubleshooting/' },
-      { text: 'Contribute', link: '/contributing/', activeMatch: '/contributing/' },
+      {
+        text: 'Resources',
+        activeMatch: '^/(troubleshooting|contributing)/',
+        items: [
+          { text: 'Troubleshooting', link: '/troubleshooting/' },
+          { text: 'Contribute', link: '/contributing/' },
+        ],
+      },
     ],
     outline: {
       level: [2, 3],
@@ -263,7 +275,7 @@ export default defineConfig({
     ],
     editLink: {
       pattern:
-        'https://github.com/mincemeat-id/documentation/edit/main/:path',
+        'https://github.com/mincemeat-id/documentation/edit/master/:path',
       text: 'Edit this page on GitHub',
     },
     footer: {
