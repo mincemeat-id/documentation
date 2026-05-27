@@ -216,6 +216,7 @@ export default defineConfig({
           collapsed: false,
           items: [
             { text: 'Overview', link: '/headless-cms/' },
+            { text: 'Create a project', link: '/headless-cms/create-project' },
             { text: 'Schema Designer', link: '/headless-cms/schema-designer' },
             { text: 'Content management', link: '/headless-cms/content-management' },
             { text: 'Media library', link: '/headless-cms/media-library' },

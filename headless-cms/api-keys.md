@@ -3,7 +3,7 @@ title: API Keys & Security
 description: Manage REST API keys, assign access scopes, and configure CORS origins to protect your content.
 category: headless-cms
 audience: user
-updated: 2026-05-26
+updated: 2026-05-27
 related:
   - /headless-cms/index
   - /headless-cms/query-dsl
@@ -23,7 +23,7 @@ Authorization: Bearer <your-api-key>
 ```
 
 - **Write-Only Credentials**: For security, Mincemeat hashes your API keys using **Argon2id** on the control plane. You can copy the raw key only *once* immediately after creation. Mincemeat administrators and databases cannot read the raw key back. If you lose a key, you must delete it and create a new one.
-- **Immediate Propagation**: When you create or revoke an API key, the changes are published to Cloudflare KV and become active across all edge locations within seconds.
+- **Immediate Propagation**: When you create or revoke an API key, the changes are published to edge key-value storage and become active across all edge locations within seconds.
 
 ## API Scopes
 
@@ -37,6 +37,28 @@ API keys are restricted by scopes to limit potential damage if a key is exposed:
 | `webhooks:write` | Replay webhook delivery events. | Monitoring and debugging dashboards. |
 | `export:write` | Trigger and download project backups. | Automated backup tasks or database sync scripts. |
 | `*` | Full CRUD operations and administrative controls. | DevOps tools, CLI agents, or full system integrations. |
+
+## Public Endpoint Permissions
+
+By default, all collection endpoints require authenticated API keys to access. However, you can configure individual collection functionalities to be **Public** (no API key required):
+
+- **List Entries**: Allow public listing of collection items.
+- **Create Entry**: Permit public entry creation (e.g., public contact or feedback forms).
+- **Get Entry**: Allow fetching single entries.
+- **Patch/Replace/Delete Entry**: Allow public updating or deleting of entries.
+- **Publish Entry**: Allow public publishing of entries.
+
+To make an endpoint public:
+
+1. Open the collection workspace and select your collection.
+2. Toggle the workspace tab to **Permissions**.
+3. Select **Public** for the desired functionalities and click **Save Permissions**.
+
+When an endpoint is configured as public:
+
+- The `Authorization` header is no longer required for that specific path.
+- The dynamic OpenAPI schema (`/v1/openapi.json`) automatically updates to mark the endpoint as unsecured.
+- Rate-limiting rules still apply to protect public endpoints from abuse.
 
 ## Cross-Origin Resource Sharing (CORS)
 

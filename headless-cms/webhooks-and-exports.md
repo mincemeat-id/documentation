@@ -3,7 +3,7 @@ title: Webhooks & Exports
 description: Set up content webhooks, verify signatures, configure static site rebuild presets, and run data exports.
 category: headless-cms
 audience: user
-updated: 2026-05-26
+updated: 2026-05-27
 related:
   - /headless-cms/index
   - /headless-cms/content-management
@@ -34,10 +34,10 @@ You can configure webhooks to trigger on the following events:
 To prevent loss of delivery notifications during destination server outages, Mincemeat runs webhooks through an asynchronous edge queue:
 
 - **Retries**: If your destination server returns a non-2xx response, Mincemeat retries delivery using an exponential back-off strategy for up to **24 hours**.
-- **HMAC Signatures**: Every webhook payload is signed. Mincemeat adds an `X-Mincemeat-Signature` header containing a SHA-256 HMAC hex hash calculated using the webhook's private secret and the raw request body:
+- **HMAC Signatures**: Every webhook payload is signed. Mincemeat adds an `x-mincemeat-signature` header containing a SHA-256 HMAC hex hash calculated using the webhook's private secret and the raw request body:
 
   ```http
-  X-Mincemeat-Signature: sha256=a1b2c3d4...
+  x-mincemeat-signature: sha256=a1b2c3d4...
   ```
 
   Your receiving server should compute the same signature using your secret to verify that the request originated from Mincemeat.
@@ -70,7 +70,7 @@ An export produces a single compressed archive (`.tar.gz`) containing:
 - `media.ndjson`: Metadata records for all files in your media library.
 
 ::: note Media Files
-Exports contain the *metadata* index for media files (allowing you to rebuild database relationships), but do not package the original binary assets. Original files remain hosted in R2 storage under their respective hashes.
+Exports contain the *metadata* index for media files (allowing you to rebuild database relationships), but do not package the original binary assets. Original files remain hosted in secure cloud storage under their respective hashes.
 :::
 
 ### Steps: Export project data

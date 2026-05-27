@@ -3,9 +3,10 @@ title: Schema Designer
 description: Create CMS projects, configure collections, define field types, and publish database schemas.
 category: headless-cms
 audience: user
-updated: 2026-05-26
+updated: 2026-05-27
 related:
   - /headless-cms/index
+  - /headless-cms/create-project
   - /headless-cms/content-management
   - /headless-cms/query-dsl
 ---
@@ -19,7 +20,7 @@ Once your design is complete, publishing the schema creates and updates the unde
 ## Before you start
 
 - You must be signed in to your Mincemeat account.
-- You must have a CMS project. If you do not have one, click **Add CMS Project** in the Headless CMS Hub and follow the wizard to name and configure the project.
+- You must have a CMS project. If you do not have one, click **Add CMS Project** in the Headless CMS Hub and follow the wizard to name and configure the project. See [Creating a CMS Project](/headless-cms/create-project) for details.
 
 ## Supported field types
 
@@ -41,7 +42,7 @@ You can customize your collections with the following field types:
 To allow you to add fields quickly without locking your database or slowing down requests, Mincemeat uses a **Hybrid Schema design**:
 
 - **Non-filterable fields**: When you add standard fields, their values are saved inside a single JSON document block (`data` column). This makes adding or removing fields instantaneous—it does not touch your database tables directly.
-- **Filterable/Sortable fields**: If you toggle **Filterable** (`is_filterable: true`) on a field, Mincemeat generates a SQLite expression index for it during publishing:
+- **Filterable/Sortable fields**: If you toggle **Filterable** (`is_filterable: true`) on a field, Mincemeat generates a database expression index for it during publishing:
 
   ```sql
   CREATE INDEX IF NOT EXISTS idx_{collection}_{field} ON entries(collection, locale, json_extract(data, '$.{field}'));
@@ -70,7 +71,7 @@ Follow these steps to create a collection and define its fields:
 ### Step 2: Add and manage fields
 
 1. Select your collection from the left sidebar of the **Collections** tab.
-2. In the top-right corner of the workspace pane, ensure the view toggle is set to **Schema Designer**.
+2. In the top-right corner of the workspace pane, ensure the view toggle is set to **Schema Designer** (next to **Entries** and **Permissions**).
 3. Select **+ Add Field**.
 4. Enter a field name, slug, and choose the **Field Type**.
 5. In the field settings panel:
@@ -92,18 +93,21 @@ Your schema changes are stored as a draft until you publish them.
 
 1. Review your collection layouts and fields.
 2. Select the **Publish Schema** button at the bottom of the left collections sidebar.
-3. Mincemeat increments your project's active schema version, executes SQLite DDL statements on your edge database, and invalidates global CDN caches.
+3. Mincemeat increments your project's active schema version, executes database DDL statements on your edge database, and invalidates global CDN caches.
 
 ## What happens next
 
 Once published:
 
 - The REST API matches your new structure.
-- You can begin creating content entries by toggling the workspace view from **Schema Designer** to **Entries**.
-- Your public OpenAPI specification is automatically regenerated at `https://{project}.cms.mincemeat.app/v1/{project}/openapi.json`.
+- You can begin creating content entries by toggling the workspace view to **Entries**, or manage access rules under the **Permissions** tab.
+- Your public OpenAPI specification is automatically regenerated at:
+  - Custom Subdomain: `https://{project-slug}.cms.mincemeat.app/v1/openapi.json`
+  - Path Fallback: `https://cms.mincemeat.app/v1/{project-slug}/openapi.json`
 
 ## Related
 
 - [Headless CMS Overview](/headless-cms/index)
+- [Creating a CMS Project](/headless-cms/create-project)
 - [Content management](/headless-cms/content-management)
 - [Query DSL reference](/headless-cms/query-dsl)

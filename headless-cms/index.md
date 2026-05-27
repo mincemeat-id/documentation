@@ -3,8 +3,9 @@ title: Headless CMS Overview
 description: Retrieve and manage structured content using Mincemeat's edge-cached REST APIs and isolated databases.
 category: headless-cms
 audience: user
-updated: 2026-05-26
+updated: 2026-05-27
 related:
+  - /headless-cms/create-project
   - /headless-cms/schema-designer
   - /headless-cms/content-management
   - /headless-cms/api-keys
@@ -20,7 +21,7 @@ Whether you are building a blog, a documentation site, or a dynamic e-commerce f
 
 The CMS platform operates on an edge-first, serverless architecture that provides the following benefits:
 
-- **Isolated databases**: To ensure security and prevent data leaks, every CMS project receives a dedicated Cloudflare D1 database.
+- **Isolated databases**: To ensure security and prevent data leaks, every CMS project receives a dedicated, isolated database instance.
 - **Edge API delivery**: API requests are resolved at the nearest Cloudflare edge location, providing low-latency responses worldwide.
 - **Dynamic OpenAPI specification**: Every project generates a live, public OpenAPI 3.1 schema based on your current content structure.
 - **Media variant resizing**: An on-demand media processor resizes and transforms images in memory at the edge, saving you from pre-generating image sizes.
@@ -43,8 +44,8 @@ To work with the Headless CMS, it is helpful to understand the key parts of the 
 +--------------------------------------------------------+
 |                     Edge API Plane                     |
 |  - Serves {project}.cms.mincemeat.app                  |
-|  - Validates scopes & queries against D1 database     |
-|  - Runs Photon WASM to resize media files              |
+|  - Validates scopes & queries against isolated database|
+|  - Runs image transform WASM to resize media files     |
 |  - Dispatches webhooks on content changes              |
 +--------------------------------------------------------+
 ```
@@ -61,7 +62,7 @@ To work with the Headless CMS, it is helpful to understand the key parts of the 
 
 To protect system resources, the following platform defaults apply:
 
-- **Media Uploads**: Maximum file upload size is **100 MB**.
+- **Media Uploads**: Maximum file upload size is **25 MB**.
 - **Edge Transformations**: Source images for on-demand variants are capped at **8 megapixels (8 MP)**. Files larger than this are served as originals or pre-processed in the background.
 - **Soft-Delete Trash**: Trashed entries are kept in the Trash Bin (accessible under **Settings -> Trash Bin**) for **30 days** by default (configurable from 1 to 365 days) before being permanently purged.
 
@@ -75,6 +76,7 @@ Advanced features planned for future iterations of the CMS include:
 
 ## Related
 
+- [Creating a CMS Project](/headless-cms/create-project)
 - [Schema Designer](/headless-cms/schema-designer)
 - [Content management](/headless-cms/content-management)
 - [API keys & security](/headless-cms/api-keys)

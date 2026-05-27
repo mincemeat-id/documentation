@@ -1,9 +1,9 @@
 ---
 title: Query DSL Reference
-description: Complete REST API guide, query parameters, filtering operators, pagination, and relationship inclusion.
+description: Complete REST API guide, query parameters, filtering, pagination, and relationship inclusion.
 category: headless-cms
 audience: user
-updated: 2026-05-25
+updated: 2026-05-27
 related:
   - /headless-cms/index
   - /headless-cms/schema-designer
@@ -24,131 +24,181 @@ Authorization: Bearer <your-api-key>
 
 Depending on your DNS routing, the REST API is accessible at:
 
-- **Plan A (Custom Subdomain)**: `https://{project-slug}.cms.mincemeat.app/v1/{project-slug}/`
-- **Plan B (Path-Based Fallback)**: `https://cms.mincemeat.app/v1/{project-slug}/`
+- **Subdomain Routing**: `https://{project-slug}.cms.mincemeat.app/v1/`
+- **Path Fallback Routing**: `https://cms.mincemeat.app/v1/{project-slug}/`
+
+### Example Endpoint Resolution
+
+When querying a collection named `posts` in a project with the slug `my-blog`:
+
+- Using subdomain: `GET https://my-blog.cms.mincemeat.app/v1/collections/posts`
+- Using path fallback: `GET https://cms.mincemeat.app/v1/my-blog/collections/posts`
+
+---
 
 ## Endpoint Index
 
 ### Content collections
 
-| Method | Route | Scope | Description |
+| Method | Route (Subdomain Mode) | Required Scope | Description |
 | --- | --- | --- | --- |
-| **GET** | `/collections/{collection}` | `public-read` | List entries (paginated, filtered). |
-| **GET** | `/collections/{collection}/{id}` | `public-read` | Retrieve a single content entry. |
-| **POST** | `/collections/{collection}` | `write` | Create a new entry (saves as draft). |
-| **PATCH** | `/collections/{collection}/{id}` | `write` | Partially update fields on an entry. |
-| **PUT** | `/collections/{collection}/{id}` | `write` | Replace an entire entry. |
-| **DELETE** | `/collections/{collection}/{id}` | `write` | Soft-delete an entry to the Trash bin. |
-| **POST** | `/collections/{collection}/{id}/publish` | `write` | Transition an entry from Draft to Published. |
+| **GET** | `/v1/collections/{collection}` | `content:read` | List entries (paginated, filtered). |
+| **GET** | `/v1/collections/{collection}/{id}` | `content:read` | Retrieve a single content entry. |
+| **POST** | `/v1/collections/{collection}` | `content:write` | Create a new entry (saves as draft). |
+| **PATCH** | `/v1/collections/{collection}/{id}` | `content:write` | Partially update fields on an entry. |
+| **PUT** | `/v1/collections/{collection}/{id}` | `content:write` | Replace an entire entry. |
+| **DELETE** | `/v1/collections/{collection}/{id}` | `content:write` | Soft-delete an entry to the Trash bin. |
+| **POST** | `/v1/collections/{collection}/{id}/publish` | `content:write` | Transition an entry from Draft to Published. |
 
 ### Media library
 
-| Method | Route | Scope | Description |
+| Method | Route (Subdomain Mode) | Required Scope | Description |
 | --- | --- | --- | --- |
-| **GET** | `/media` | `public-read` | List media asset metadata records. |
-| **POST** | `/media` | `write` | Upload a new file (multipart/form-data). |
-| **GET** | `/media/{id}` | `public-read` | Retrieve metadata for one media file. |
-| **GET** | `/media/{id}/file` | `public-read` | Fetch the file (supports resizing query parameters). |
-| **DELETE** | `/media/{id}` | `write` | Soft-delete a media asset to the Trash bin. |
+| **GET** | `/v1/media` | `content:read` | List media asset metadata records. |
+| **POST** | `/v1/media` | `content:write` | Upload a new file (multipart/form-data). |
+| **GET** | `/v1/media/{id}` | `content:read` | Retrieve metadata for one media file. |
+| **GET** | `/v1/media/{id}/file` | `content:read` | Fetch the binary file (supports resizing query parameters). |
+| **DELETE** | `/v1/media/{id}` | `content:write` | Hard-delete a media asset. |
 
 ### Utilities
 
-| Method | Route | Scope | Description |
+| Method | Route (Subdomain Mode) | Required Scope | Description |
 | --- | --- | --- | --- |
-| **GET** | `/openapi.json` | None (Public) | Fetch the dynamically generated OpenAPI schema. |
-| **POST** | `/cache/purge` | `admin` | Instantly invalidate edge caches for the project. |
+| **GET** | `/v1/openapi.json` | None (Public) | Fetch the dynamically generated OpenAPI schema. |
+| **POST** | `/v1/cache/purge` | `cache:purge` | Instantly invalidate edge caches for the project. |
+
+---
 
 ## Query DSL Parameters
 
-The `GET /collections/{collection}` endpoint accepts query parameters to filter, sort, paginate, and expand relations.
+The `GET /v1/collections/{collection}` endpoint accepts query parameters to filter, sort, paginate, and expand relations.
 
 ### 1. Filtering
 
-Filters use the format `?filter[field_slug][operator]=value`.
+Filters are applied as exact matches on fields using the format `?filter[field_slug]=value`.
 
 ::: important Filterable Check
-You can only filter on fields that have been configured with **Filterable** (`is_filterable: true`) in the Schema Designer. Attempting to filter on non-indexed fields returns a `400 Bad Request` error to protect edge performance.
+You can only filter on fields that have been configured with **Filterable** (`is_filterable: true`) in the Schema Designer. Attempting to filter on non-indexed fields returns a `400 Bad Request` error to protect edge database performance.
 :::
 
-#### Supported operators
+#### Exact-Match Constraint
 
-- `eq`: Equal to (e.g. `?filter[status][eq]=published`)
-- `ne`: Not equal to
-- `gt`: Greater than (e.g. `?filter[views][gt]=100`)
-- `gte`: Greater than or equal to
-- `lt`: Less than
-- `lte`: Less than or equal to
-- `contains`: Substring search (string fields only, e.g. `?filter[title][contains]=news`)
-- `in`: Match any value in a comma-separated list (e.g. `?filter[category][in]=news,events`)
+The REST API in V1 checks for strict equality. Comparison operators (such as `[eq]`, `[gt]`, `[contains]`, or `[in]`) are not supported. You can combine multiple exact filters on different fields.
 
-#### Example filter query
+#### Example Filter Query
+
+To find entries in `posts` where the custom filterable field `category` equals `news`:
 
 ```http
-GET /v1/my-blog/collections/posts?filter[status][eq]=published&filter[published_at][gte]=1716595200
+GET https://my-blog.cms.mincemeat.app/v1/collections/posts?filter[category]=news
+```
+
+To search across the full JSON document text block (equivalent to a SQL `LIKE %query%` search), use the `q` parameter:
+
+```http
+GET https://my-blog.cms.mincemeat.app/v1/collections/posts?q=searchterm
+```
+
+To filter entries by their lifecycle status, use the `status` parameter (supported values are `draft` or `published`):
+
+```http
+GET https://my-blog.cms.mincemeat.app/v1/collections/posts?status=published
 ```
 
 ### 2. Sorting
 
 Sort results using `?sort=field_slug` (ascending) or `?sort=-field_slug` (descending).
 
-- You can sort by multiple fields using a comma-separated list: `?sort=-published_at,title`.
+- Sorting is supported for a single field slug at a time. Multi-field comma-separated sorting is not supported.
 - Like filtering, you can only sort by fields marked as **Filterable** in your schema.
+- If no sort parameter is provided, listings default to sorting by `updated_at DESC`.
+
+```http
+GET https://my-blog.cms.mincemeat.app/v1/collections/posts?sort=-published_date
+```
 
 ### 3. Pagination
 
-API listings are paginated by default:
+API listings are paginated using `limit` and `offset` constraints to protect edge compute:
 
-- `page`: Page index to retrieve (defaults to `1`).
-- `pageSize`: Number of entries per page (defaults to `20`, maximum `100`).
+- `limit`: The number of items to return. Defaults to `25`, clamped between `1` and `100`.
+- `offset`: The number of items to skip. Defaults to `0`, clamped between `0` and `10000`.
 
-The response is returned in a standard envelope:
+The paginated result is returned in the following envelope format:
 
 ```json
 {
-  "data": [
-    { "id": "01J...1", "title": "First Post", ... }
+  "items": [
+    {
+      "id": "7ca6473e-324c-4fb2-a5e2-6bb51b54a71b",
+      "collection": "posts",
+      "locale": "en",
+      "status": "published",
+      "version": 2,
+      "data": {
+        "title": "First Blog Post",
+        "category": "news",
+        "published_date": "2026-05-27"
+      },
+      "created_at": "2026-05-27T10:00:00Z",
+      "updated_at": "2026-05-27T10:30:00Z",
+      "published_at": "2026-05-27T10:30:00Z",
+      "deleted_at": null
+    }
   ],
-  "meta": {
-    "page": 1,
-    "pageSize": 20,
-    "total": 145
-  }
+  "total": 1,
+  "limit": 25,
+  "offset": 0
 }
 ```
 
 ### 4. Relationship Inclusion
 
-Fields of type `relation` or `media` normally return only the ID of the referenced entry or file. You can expand these references inline by adding the `include` parameter:
+Fields of type `relation` or `media` normally return only the UUID string referencing the target entry or media asset. You can expand these references inline by adding the `include` parameter with comma-separated field slugs:
 
 ```http
-GET /v1/my-blog/collections/posts/01HZZ...1?include=author,cover_image
+GET https://my-blog.cms.mincemeat.app/v1/collections/posts/7ca6473e-324c-4fb2-a5e2-6bb51b54a71b?include=author,cover_image
 ```
 
 This returns the full referenced record directly inside the parent object:
 
 ```json
 {
-  "id": "01HZZ...1",
-  "title": "First Post",
-  "author": {
-    "id": "01HZZ...2",
-    "name": "Jane Doe"
-  },
-  "cover_image": {
-    "id": "01HZZ...3",
-    "filename": "banner.webp",
-    "width": 1200
+  "id": "7ca6473e-324c-4fb2-a5e2-6bb51b54a71b",
+  "collection": "posts",
+  "data": {
+    "title": "First Blog Post",
+    "author": {
+      "id": "e96ab2c3-4318-47fb-ba8e-cbb96ee4ba81",
+      "collection": "authors",
+      "locale": "en",
+      "status": "published",
+      "version": 1,
+      "data": {
+        "name": "Jane Doe"
+      }
+    },
+    "cover_image": {
+      "id": "d0fbc05c-1919-450a-8a03-7cbdfa2c2ef1",
+      "filename": "banner.webp",
+      "content_type": "image/webp",
+      "size_bytes": 14205,
+      "sha256": "abcdef...",
+      "alt_text": "Post Banner"
+    }
   }
 }
 ```
+
+---
 
 ## Concurrency & Optimistic Locking
 
 To prevent editing conflicts when multiple users or systems edit the same content simultaneously:
 
 - **Schema Version**: Every API response contains the `X-CMS-Schema-Version` header. If a client attempts to save changes using a stale schema configuration, the request is rejected.
-- **Optimistic Concurrency Control (OCC)**: `GET` endpoints return an `ETag` header. When sending a modifying request (`PATCH`, `PUT`, or `DELETE`), include the `If-Match: "<etag>"` header.
-  - If the content has changed since you fetched it, the Worker aborts with a `412 Precondition Failed` error, allowing you to handle the conflict safely.
+- **Optimistic Concurrency Control (OCC)**: `GET` endpoints return a strong `ETag` header (e.g. `"2"` representing the version). When sending a modifying request (`PATCH`, `PUT`, or `DELETE`), you must include the matching `If-Match: "<etag>"` header (e.g. `If-Match: "2"`).
+  - If the content version has incremented in the database since you fetched it, the edge worker aborts with a `412 Precondition Failed` error, allowing you to handle the conflict safely.
 
 ## Related
 

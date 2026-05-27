@@ -3,7 +3,7 @@ title: Content Management
 description: Manage collection entries, publish drafts, and use the soft-delete Trash retention system.
 category: headless-cms
 audience: user
-updated: 2026-05-26
+updated: 2026-05-27
 related:
   - /headless-cms/index
   - /headless-cms/schema-designer
@@ -35,7 +35,7 @@ Every content entry moves through a defined set of states:
                        +-----------------+
 ```
 
-- **Draft**: Newly created or edited entries start as drafts. Drafts are stored in the project's SQLite database but are excluded from API requests that require only public-read scope.
+- **Draft**: Newly created or edited entries start as drafts. Drafts are stored in the project's isolated database but are excluded from API requests that require only public-read scope.
 - **Published**: Publishing transitions the entry to a live state, making it queryable by public-read API keys.
 - **Trashed (Soft-Deleted)**: Deleting an entry moves it to the Trash view. It is immediately removed from all regular API listings.
 
